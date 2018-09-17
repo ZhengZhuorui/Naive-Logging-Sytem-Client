@@ -1,0 +1,51 @@
+<!--pages/preview_mcbegin/preview_mcbegin.wxml-->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">提交预览</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您所在的组织名称</view>
+                    <view class="weui-form-preview__value_in-hd">{{yourorganization}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">被评估组织名称</view>
+                    <view class="weui-form-preview__value_in-hd">{{organization}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">问题1分数</view>
+                    <view class="weui-form-preview__value">{{fengong}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">问题2分数</view>
+                    <view class="weui-form-preview__value">{{chongdie}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">问题3分数</view>
+                    <view class="weui-form-preview__value">{{fuwu}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">问题4分数</view>
+                    <view class="weui-form-preview__value">{{canyudu}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">问题5分数</view>
+                    <view class="weui-form-preview__value">{{yusuan}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您的建议</view>
+                    <view class="weui-form-preview__value_in-hd">{{jianyi}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <navigator  class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='switchBack'>返回</navigator>
+            </view>
+        </view>
+    </view>
+</view>

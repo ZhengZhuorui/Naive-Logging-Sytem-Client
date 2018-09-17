@@ -1,0 +1,4 @@
+/* pages/mutualcomment_success/mutualcomment_success.wxss */
+page{
+    background-color: #FFFFFF;
+}

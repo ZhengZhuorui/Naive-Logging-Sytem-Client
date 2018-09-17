@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/record/record",
+    "pages/comment/comment",
+    "pages/public/public",
+    "pages/worker/worker",
+    "pages/residence/residence",
+    "pages/preview/preview",
+    "pages/residence_success/residence_success",
+    "pages/share/share",
+    "pages/mutualcomment/mutualcomment",
+    "pages/mutualcomment_begin/mutualcomment_begin",
+    "pages/mutualcomment_middle/mutualcomment_middle",
+    "pages/mutualcomment_end/mutualcomment_end",
+    "pages/mutualcomment_success/mutualcomment_success",
+    "pages/not_existed/not_existed",
+    "pages/preview_mcbegin/preview_mcbegin",
+    "pages/preview_mcmiddle/preview_mcmiddle",
+    "pages/preview_mcend/preview_mcend"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "社区营造小助手",
+    "navigationBarTextStyle": "black"
+  }
+}

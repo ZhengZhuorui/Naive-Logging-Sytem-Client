@@ -1,0 +1,193 @@
+<import src="../../components/gallery.wxml"/>
+<import src="../../components/picker-city/picker-city.wxml"/>
+
+<template is="gallery" data="{{ ...$wux.gallery }}"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">活动信息</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">个人感受</view>
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">相关图片</view>
+</view>
+
+<view class="page__bd">
+  <view wx:if="{{showPage1}}" class='page-view page__bd'>
+    <view class="weui-cells__title">基本信息</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">组织名称</view>
+        </view>
+        <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请点击选择组织名称" />
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">参与人数</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input value="{{joinNumber}}" class="weui-input" placeholder="请输入参与人数" bindchange="bindJoinNumberChange" />
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">地点</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input value="{{location}}" class="weui-input" placeholder="请输入地点" bindchange="bindLocationChange" />
+        </view>
+      </view>
+
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+            <view class="weui-input">{{date}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
+            <view class="weui-input">{{time}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="weui-cells__title">活动主题</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input value="{{theme}}" class="weui-input" placeholder="请输入主题" bindchange="bindThemeChange" />
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">活动内容</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea hidden="{{!showContent}}" value="{{content}}" class="weui-textarea" row="8" placeholder="请输入活动内容"  bindinput="bindContentChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{content.length}}/300</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{showPage2}}" class='page-view page__bd'>
+     <view class="weui-cells__title">您的姓名</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+          <input value="{{name}}" class="weui-input" placeholder="请输入您的姓名" bindchange="bindNameChange" />
+        </view>
+      </view>
+    </view>
+
+
+    <view class="weui-cells__title">感悟</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{feeling}}" class="weui-textarea" placeholder="请输入您的感悟" row="8" bindinput="bindFeelingChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{feeling.length}}/300</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">背景介绍</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{other}}" class="weui-textarea" placeholder="请输入文本" row="8" bindinput="bindOtherChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{other.length}}/300</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{showPage3}}" class='page-view page__bd'>
+    <view class="page__bd">
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">活动精彩瞬间</view>
+                <view class="weui-uploader__info">{{activityPhotoUrls.length}}/10</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for-items="{{activityPhotoUrls}}" wx:key="{{index}}">
+                    <view class="weui-uploader__file" bindtap="showGallery" id="{{item}}" data-current="{{index}}" data-type="activity">
+                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    </view>
+                  </block>
+
+
+
+                </view>
+                <view class="weui-uploader__input-box">
+                  <view class="weui-uploader__input" bindtap="chooseActivityImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="page__bd">
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">微创投记录</view>
+                <view class="weui-uploader__info">{{sheetPhotoUrls.length}}/10</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for-items="{{sheetPhotoUrls}}" wx:key="{{index}}">
+                    <view class="weui-uploader__file" bindtap="showGallery" id="{{item}}" data-current="{{index}}" data-type="sheet">
+                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    </view>
+                  </block>
+
+
+
+                </view>
+                <view class="weui-uploader__input-box">
+                  <view class="weui-uploader__input" bindtap="chooseSheetImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+
+    <view class="weui-btn-area">
+    <button class="weui-btn btn-mid" type="primary" plain='true' bindtap="switchToPreview">预览</button>
+      <button class="weui-btn btn-mid" type="primary"  bindtap='submitAll'>提交</button>
+    </view>
+  </view>
+
+    
+
+   
+
+    
+  </view>
+</view>

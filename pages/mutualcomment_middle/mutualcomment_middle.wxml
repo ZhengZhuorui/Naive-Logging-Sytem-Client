@@ -1,0 +1,92 @@
+<!--pages/mutualcomment_middle/mutualcomment_middle.wxml-->
+<!--pages/mutualcomment/mutualcomment.wxml-->
+<import src="../../components/gallery.wxml"/>
+<import src="../../components/picker-city/picker-city.wxml"/>
+
+<template is="gallery" data="{{ ...$wux.gallery }}"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center;font-size:40px">过程评估</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">您所在的组织名称</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindyourOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所在组织</view>
+        </view>
+        <input value="{{yourorganization}}" disabled="true" class="weui-input" placeholder="请选择您所在的组织名称" />
+      </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">被评估组织名称</view>        
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">被评估组织</view>
+        </view>
+        <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择被评估组织名称" />
+      </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">评估内容</view>
+    <wux-cell-group title="1">
+            <wux-cell title="活动内容丰富，符合服务对象需求" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{neirong}}" bind:change="onChange1"/>
+                  <text class="wux-rater__text">{{ neirong }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="2">
+            <wux-cell title="活动实施流程清晰，准备充分完善" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{liucheng}}" bind:change="onChange2"/>
+                  <text class="wux-rater__text">{{ liucheng }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="3">
+            <wux-cell title="活动效果明显、影响力大，且受益群体覆盖率大" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ xiaoguo }}" bind:change="onChange3"/>
+                  <text class="wux-rater__text">{{ xiaoguo }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="4">
+            <wux-cell title="组织成员分工明确、团结合作" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ fengong }}" bind:change="onChange4"/>
+                  <text class="wux-rater__text">{{ fengong }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="5">
+            <wux-cell title="资金支出符合预算编制，或提前进行资金变更申请，符合财务使用规范" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ zijin }}" bind:change="onChange5"/>
+                  <text class="wux-rater__text">{{ zijin }} 分</text>
+            </view>
+    </wux-cell-group>
+
+
+    <view class="weui-cells__title">您的建议及感受</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{jianyi}}" class="weui-textarea" placeholder="您对该组织及活动的建议和感受" row="8" bindinput="bindJianyiChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{jianyi.length}}/300</view>
+        </view>
+      </view>
+    </view>
+
+   
+    <view class="weui-btn-area">
+    <button class="weui-btn btn-mid" type="primary" plain='true' bindtap="switchToPreview_mcmiddle">预览</button>
+      <button class="weui-btn btn-mid" type="primary"  bindtap='submitAll'>提交</button>
+    </view>
+  </view>
+</view>
+

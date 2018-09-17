@@ -1,0 +1,4 @@
+/* pages/preview_mcbegin/preview_mcbegin.wxss */
+.weui-form-preview{
+    margin-bottom: 25px;
+}

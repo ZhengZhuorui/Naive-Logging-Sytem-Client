@@ -1,0 +1,14 @@
+/* pages/share/share.wxss */
+page{
+  background-color:#f6f6f6;
+}
+
+.img-box{
+  display:block;
+  width: 360px;
+  height: 280px;
+  margin:auto;
+  margin-bottom: 30px;
+  margin-top:30px;
+}
+

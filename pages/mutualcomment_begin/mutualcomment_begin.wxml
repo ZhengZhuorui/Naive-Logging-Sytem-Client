@@ -1,0 +1,90 @@
+<!--pages/mutualcomment/mutualcomment.wxml-->
+<import src="../../components/gallery.wxml"/>
+<import src="../../components/picker-city/picker-city.wxml"/>
+
+<template is="gallery" data="{{ ...$wux.gallery }}"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center;font-size:40px">立项评估</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">您所在的组织名称</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindyourOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所在组织</view>
+        </view>
+        <input value="{{yourorganization}}" disabled="true" class="weui-input" placeholder="请选择您所在的组织名称" />
+      </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">被评估组织名称</view>        
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">被评估组织</view>
+        </view>
+        <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择被评估组织名称" />
+      </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">评估内容</view>
+    <wux-cell-group title="1">
+            <wux-cell title="组织分工明确、团结合作" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{fengong}}" bind:change="onChange1"/>
+                  <text class="wux-rater__text">{{ fengong }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="2">
+            <wux-cell title="组织间成员重叠率较低，无身兼数职现象" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{chongdie}}" bind:change="onChange2"/>
+                  <text class="wux-rater__text">{{ chongdie }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="3">
+            <wux-cell title="项目符合社区大部分居民需求，具有社区服务性质" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ fuwu }}" bind:change="onChange3"/>
+                  <text class="wux-rater__text">{{ fuwu }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="4">
+            <wux-cell title="项目计划合理、可实施性强，居民可以参与到此项目中" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ canyudu }}" bind:change="onChange4"/>
+                  <text class="wux-rater__text">{{ canyudu }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="5">
+            <wux-cell title="预算合理，与项目计划相符，单价、数量编制合理" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ yusuan }}" bind:change="onChange5"/>
+                  <text class="wux-rater__text">{{ yusuan }} 分</text>
+            </view>
+    </wux-cell-group>
+
+
+    <view class="weui-cells__title">您的建议及感受</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{jianyi}}" class="weui-textarea" placeholder="请对该组织及活动的建议和感受" row="8" bindinput="bindJianyiChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{jianyi.length}}/300</view>
+        </view>
+      </view>
+    </view>
+
+   
+    <view class="weui-btn-area">
+    <button class="weui-btn btn-mid" type="primary" plain='true' bindtap="switchToPreview_mcbegin">预览</button>
+      <button class="weui-btn btn-mid" type="primary"  bindtap='submitAll'>提交</button>
+    </view>
+  </view>
+</view>

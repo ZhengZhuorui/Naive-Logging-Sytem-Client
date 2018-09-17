@@ -1,0 +1,4 @@
+/* pages/residence_success/residence_success.wxss */
+page{
+    background-color: #FFFFFF;
+}
