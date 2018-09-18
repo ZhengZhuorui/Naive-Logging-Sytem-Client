@@ -1,0 +1,84 @@
+<!--pages/preview_exmiddle/preview_exmiddle.wxml-->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">提交预览</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您的名字</view>
+                    <view class="weui-form-preview__value_in-hd">{{mingzi}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您所在的单位</view>
+                    <view class="weui-form-preview__value_in-hd">{{suozaidanwei}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">被评估组织</view>
+                    <view class="weui-form-preview__value_in-hd">{{organization}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">活动内容丰富，活动设计合理且充分</view>
+                    <view class="weui-form-preview__value">{{neirong}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">符合服务对象需求，具有前期调研的过程</view>
+                    <view class="weui-form-preview__value">{{xuqiu}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">活动实施流程清晰，有明确且详细的活动方案</view>
+                    <view class="weui-form-preview__value">{{liucheng}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">筹备过程完整，准备充分完善</view>
+                    <view class="weui-form-preview__value">{{guocheng}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">活动效果良好，影响力广泛</view>
+                    <view class="weui-form-preview__value">{{xiaoguo}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">受益群体（非本组织成员）覆盖率大，数量超过活动总人数的60%</view>
+                    <view class="weui-form-preview__value">{{fugailv}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">组织成员分工明确，至少五位团队成员参与到此次活动的筹备及实施过程</view>
+                    <view class="weui-form-preview__value">{{fengong}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">组织成员能够团结协作，形成团队合力，共同处理团队事务</view>
+                    <view class="weui-form-preview__value">{{tuanjie}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">资金支出符合预算编制，或提前进行资金变更申请</view>
+                    <view class="weui-form-preview__value">{{zijin}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">财务票据规范，符合财务使用规范</view>
+                    <view class="weui-form-preview__value">{{caiwu}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您对自组织的建议</view>
+                    <view class="weui-form-preview__value_in-hd">{{zizuzhi}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您对项目设计及项目管理的建议</view>
+                    <view class="weui-form-preview__value_in-hd">{{xiangmusheji}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您对资金使用及预算编制的建议</view>
+                    <view class="weui-form-preview__value_in-hd">{{zijinshiyong}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <navigator  class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='switchBack'>返回</navigator>
+            </view>
+        </view>
+    </view>
+</view>
+

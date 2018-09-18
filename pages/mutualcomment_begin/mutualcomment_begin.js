@@ -2,7 +2,7 @@
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
 
-var util = require('../../utils/util.js');
+var util = require('../../utils/util.js'); 
 Page({
 
   /**

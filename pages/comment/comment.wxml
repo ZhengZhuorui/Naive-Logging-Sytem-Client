@@ -21,7 +21,7 @@
         </view>
 
         <view class="icon-box">
-            <icon bindtap="switchToNot_existed" type="info" size="61" color="orange"></icon>
+            <icon bindtap="switchToexpert" type="info" size="61" color="orange"></icon>
             <view class="icon-box__ctn">
                 <view class="icon-box__title">专家评估</view>
                 <view class="icon-box__desc"></view>

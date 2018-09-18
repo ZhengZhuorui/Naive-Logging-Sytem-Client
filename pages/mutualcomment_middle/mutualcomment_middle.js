@@ -18,7 +18,7 @@ Page({
     fengong: "",
     zijin: "",
     jianyi: "",
-    nickname:''
+    nickname:""
 
   },
 
@@ -27,12 +27,7 @@ Page({
    */
   onLoad: function () {
     var that = this;
-    var mutualcomment_middleData = wx.getStorageSync('mutualcomment_middleData');
-    var time = util.getNowFormatDate();
-    this.setData({
-      time:time
-    }
-    );
+    var mutualcomment_middleData = wx.getStorageSync('mutualcomment_middleData')
     if (mutualcomment_middleData) {
       this.setData({
         yourorganization: mutualcomment_middleData.yourorganization,
@@ -45,6 +40,17 @@ Page({
         zijin: mutualcomment_middleData.zijin,
         jianyi: mutualcomment_middleData.jianyi,
         nickname: mutualcomment_middleData.nickname
+      });
+    }
+    var time = util.getNowFormatDate();
+    this.setData({
+      time: time
+    }
+    );
+    if (!that.data.submitSuccess) {
+      wx.setStorage({
+        key: 'mutualcomment_middleData',
+        data: this.data,
       });
     }
 
@@ -95,6 +101,7 @@ Page({
           avatarUrl: res.userInfo.avatarUrl,
           nickname: res.userInfo.nickName,
         });
+        console.log(nickname);
      }
     })
   },

@@ -17,7 +17,12 @@
     "pages/not_existed/not_existed",
     "pages/preview_mcbegin/preview_mcbegin",
     "pages/preview_mcmiddle/preview_mcmiddle",
-    "pages/preview_mcend/preview_mcend"
+    "pages/preview_mcend/preview_mcend",
+    "pages/expert/expert",
+    "pages/expert_begin/expert_begin",
+    "pages/expert_middle/expert_middle",
+    "pages/expert_end/expert_end",
+    "pages/preview_exmiddle/preview_exmiddle"
   ],
   "window": {
     "backgroundTextStyle": "light",
