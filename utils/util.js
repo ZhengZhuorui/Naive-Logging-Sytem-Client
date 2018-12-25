@@ -15,7 +15,7 @@ function getNowFormatDate() {
   if (strDate >= 0 && strDate <= 9) {
     strDate = "0" + strDate;
   }
-  var currentdate = year + seperator1 + month + seperator1 + strDate + ' ' + hour + seperator2 + minute + seperator2 + second + seperator2;
+  var currentdate = year + seperator1 + month + seperator1 + strDate + ' ' + hour + seperator2 + minute + seperator2 + second;
   return currentdate;
 }
 

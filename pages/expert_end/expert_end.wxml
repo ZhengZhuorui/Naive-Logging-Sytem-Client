@@ -1,2 +1,158 @@
 <!--pages/expert_end/expert_end.wxml-->
-<text>pages/expert_end/expert_end.wxml</text>
+<import src="../../components/gallery.wxml"/>
+<import src="../../components/picker-city/picker-city.wxml"/>
+
+<template is="gallery" data="{{ ...$wux.gallery }}"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center;font-size:40px">结题评估</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">您的姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input value="{{xingming}}" class="weui-input" placeholder="请输入您的姓名" bindchange="bindxingmingChange" />
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所在单位</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input value="{{gongzuodanwei}}" class="weui-input" placeholder="请输入您所在的单位" bindchange="bindgongzuodanweiChange" />
+        </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">被评估组织名称</view>        
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">被评估组织</view>
+        </view>
+        <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择被评估组织名称" />
+      </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">评估内容</view>
+    <wux-cell-group title="1">
+            <wux-cell title="自组织至少具有5名以上成员的核心小组，核心小组成员无阻止内外身兼数职现象，能够协商组织内部各项事务" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{q1}}" bind:change="onChange1"/>
+                  <text class="wux-rater__text">{{ q1 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="2">
+            <wux-cell title="社区自组织能够独立执行项目，具有分工及协作能力，且有计划继续发展该组织" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{q2}}" bind:change="onChange2"/>
+                  <text class="wux-rater__text">{{ q2 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="3">
+            <wux-cell title="形成自组织管理规范，具有团队规则，并具有组织内部治理机制" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q3 }}" bind:change="onChange3"/>
+                  <text class="wux-rater__text">{{ q3 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="4">
+            <wux-cell title="项目目标基本实现，且项目具有可持续性，将继续开展该项目" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q4 }}" bind:change="onChange4"/>
+                  <text class="wux-rater__text">{{ q4 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="5">
+            <wux-cell title="项目活动时间、次数及内容与计划基本一致，若有调整，理由较充分" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q5 }}" bind:change="onChange5"/>
+                  <text class="wux-rater__text">{{ q5 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="6">
+            <wux-cell title="项目效果得到受益人群肯定，服务对象人数及人次与原计划基本一致" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q6 }}" bind:change="onChange6"/>
+                  <text class="wux-rater__text">{{ q6 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="7">
+            <wux-cell title="项目具有服务性，关注社区公共事务及特殊人群" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q7 }}" bind:change="onChange7"/>
+                  <text class="wux-rater__text">{{ q7 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="8">
+            <wux-cell title="项目资金使用规范，基本无调整情况，若有调整，理由较充分" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q8 }}" bind:change="onChange8"/>
+                  <text class="wux-rater__text">{{ q8 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="9">
+            <wux-cell title="项目资金报销凭证规范且报销及时，报销金额和报销时间与项目计划一致" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q9 }}" bind:change="onChange9"/>
+                  <text class="wux-rater__text">{{ q9 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="10">
+            <wux-cell title="能够主动筹集外部社会资源或多元资金，并具有社会资源协调能力，助力项目开展" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q10 }}" bind:change="onChange10"/>
+                  <text class="wux-rater__text">{{ q10 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+
+    <view class="weui-cells__title">您对自组织的建议</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{jianyi1}}" class="weui-textarea" placeholder="" row="8" bindinput="bindzizuzhiChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{jianyi1.length}}/300</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">您对项目设计及项目管理的建议</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{jianyi2}}" class="weui-textarea" placeholder="" row="8" bindinput="bindxiangmushejiChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{jianyi2.length}}/300</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title">您对资金使用及预算编制的建议</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{jianyi3}}" class="weui-textarea" placeholder="" row="8" bindinput="bindzijinshiyongChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{jianyi3.length}}/300</view>
+        </view>
+      </view>
+    </view>
+
+   
+    <view class="weui-btn-area">
+    <button class="weui-btn btn-mid" type="primary" plain='true' bindtap="switchTopreview_exend">预览</button>
+      <button class="weui-btn btn-mid" type="primary"  bindtap='submitAll'>提交</button>
+    </view>
+  </view>
+</view>
+

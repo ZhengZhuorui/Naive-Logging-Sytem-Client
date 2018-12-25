@@ -1,0 +1,60 @@
+<!--pages/preview_serviceob/preview_serviceob.wxml-->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">提交预览</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您的名字</view>
+                    <view class="weui-form-preview__value_in-hd">{{xingming}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您所在的单位</view>
+                    <view class="weui-form-preview__value_in-hd">{{gongzuodanwei}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">举办活动组织</view>
+                    <view class="weui-form-preview__value_in-hd">{{organization}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">服务日期</view>
+                    <view class="weui-form-preview__value_in-hd">{{servicedate}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">服务时间</view>
+                    <view class="weui-form-preview__value_in-hd">{{servicetime}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">活动生动有趣</view>
+                    <view class="weui-form-preview__value">{{q1}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">我很喜欢这个活动</view>
+                    <view class="weui-form-preview__value">{{q2}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">会向别人推荐该活动</view>
+                    <view class="weui-form-preview__value">{{q3}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">对于此次活动您的建议或意见</view>
+                    <view class="weui-form-preview__value_in-hd">{{zizuzhi}}</view>
+                </view>
+            </view>
+            <view class="weui-form-preview__ft">
+                <navigator  class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='switchBack'>返回</navigator>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+
+
+

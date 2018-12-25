@@ -1,4 +1,4 @@
-// pages/expert_middle/expert_middle.js
+// pages/serviceobject/serviceobject.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
 
@@ -9,24 +9,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    xingming:"",
-    gongzuodanwei:"",
-    organization:"请选择被评估组织",
-    neirong:"",
-    xuqiu:"",
-    liucheng:"",
-    guocheng:"",
-    xiaoguo:"",
-    fugailv:"",
-    fengong:"",
-    tuanjie:"",
-    zijin:"",
-    caiwu:"",
-    zizuzhi:"",
-    xiangmusheji:"",
-    zijinshiyong:"",
-    time:"",
-    nickname:""
+    showOther: "none",  //是否展示other这个输入框
+    xingming: "",
+    gongzuodanwei: "",
+    servicedate:"请选择活动日期",
+    servicetime:"请选择活动具体时间",
+    serviceplace:"",
+    organization: "", //举办活动的社区组织名称 
+    q1: "",
+    q2: "",
+    q3: "",
+    jianyi: "",
+    time: "",
+    nickname: ""
   },
 
   /**
@@ -34,27 +29,22 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var expert_middleData = wx.getStorageSync('expert_middleData');
-    if(expert_middleData){
+    var seviceobjectData = wx.getStorageSync('seviceobjectData');
+    if (seviceobjectData) {
       this.setData({
-        xingming: expert_middleData.xingming,
-        gongzuodanwei: expert_middleData.gongzuodanwei,
-        organization: expert_middleData.organization,
-        neirong: expert_middleData.neirong,
-        xuqiu: expert_middleData.xuqiu,
-        liucheng: expert_middleData.liucheng,
-        guocheng: expert_middleData.guocheng,
-        xiaoguo: expert_middleData.xiaoguo,
-        fugailv: expert_middleData.fugailv,
-        fengong: expert_middleData.fengong,
-        tuanjie: expert_middleData.tuanjie,
-        zijin: expert_middleData.zijin,
-        caiwu: expert_middleData.caiwu,
-        zizuzhi: expert_middleData.zizuzhi,
-        xiangmusheji: expert_middleData.xiangmusheji,
-        zijinshiyong: expert_middleData.zijinshiyong,
-        time: expert_middleData.time,
-        nickname: expert_middleData.nickname
+        showOther: seviceobjectData.showOther,  //是否展示other这个输入框
+        xingming: seviceobjectData.xingming,
+        gongzuodanwei: seviceobjectData.gongzuodanwei,
+        organization: seviceobjectData.organization,
+        servicedate: seviceobjectData.servicedate,
+        servicetime: seviceobjectData.servicetime,
+        serviceplace: seviceobjectData.serviceplace,
+        q1: seviceobjectData.q1,
+        q2: seviceobjectData.q2,
+        q3: seviceobjectData.q3,
+        jianyi: seviceobjectData.jianyi,
+        time: seviceobjectData.time,
+        nickname: seviceobjectData.nickname
       })
     }
     var time = util.getNowFormatDate();
@@ -92,8 +82,8 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
+ * 生命周期函数--监听页面隐藏
+ */
   onHide: function () {
     var that = this;
     this.setData({
@@ -101,7 +91,7 @@ Page({
     });
     if (!that.data.submitSuccess) {
       wx.setStorage({
-        key: 'expert_middleData',
+        key: 'seviceobjectData',
         data: this.data,
       });
     }
@@ -120,15 +110,16 @@ Page({
         showContent: true
       });
       wx.setStorage({
-        key: 'expert_middleData',
+        key: 'seviceobjectData',
         data: this.data,
       });
     }
   },
 
+
   /**
    * 页面相关事件处理函数--监听用户下拉动作
-   */
+  */
   onPullDownRefresh: function () {
 
   },
@@ -157,19 +148,19 @@ Page({
       gongzuodanwei: e.detail.value
     });
   },
-  /*选择被评估组织名称*/
-  bindOrganizationPickerChange:function(){
+  /*选择服务提供组织名称*/
+  bindOrganizationPickerChange: function () {
     var that = this;
     this.setData({
       showContent: false
     });
     $wuxPickerCity.init('city', {
-      title: '请选择被评估组织名称',
+      title: '',
       value: [8, 0, 11],
       onChange(p) {
         console.log(p);
         that.setData({
-          organization: p.value[2]
+          organization: p.value[2],
         });
       },
       onHidden() {
@@ -179,93 +170,59 @@ Page({
         });
       }
     });
-},
+  },
+  organizationchange(e) {
+    this.setData({
+      organization: e.detail.value
+    })
+  },
+  //日期和时间监听器
+  bindDateChange: function (e) {
+    this.setData({
+      servicedate: e.detail.value
+    })
+  },
+  bindTimeChange: function (e) {
+    this.setData({
+      servicetime: e.detail.value
+    })
+  },
+  bindPlaceChange: function (e) {
+    this.setData({
+      serviceplace: e.detail.value
+    })
+  },
   onChange1(e) {
     this.setData({
-      neirong: e.detail.value,
+      q1: e.detail.value,
     })
     console.log(e)
   },
   onChange2(e) {
     this.setData({
-      xuqiu: e.detail.value,
+      q2: e.detail.value,
     })
     console.log(e)
   },
   onChange3(e) {
     this.setData({
-      liucheng: e.detail.value,
+      q3: e.detail.value,
     })
     console.log(e)
   },
-  onChange4(e) {
+  
+
+  bindjianyiChange: function (e) {
+    var value = e.detail.value, len = parseInt(value.length);
+    if (len > 300) return;
     this.setData({
-      guocheng: e.detail.value,
-    })
-    console.log(e)
-  },
-  onChange5(e) {
-    this.setData({
-      xiaoguo: e.detail.value,
-    })
-    console.log(e)
-  },
-  onChange6(e) {
-    this.setData({
-      fugailv: e.detail.value,
-    })
-    console.log(e)
-  },
-  onChange7(e) {
-    this.setData({
-      fengong: e.detail.value,
-    })
-    console.log(e)
-  },
-  onChange8(e) {
-    this.setData({
-      tuanjie: e.detail.value,
-    })
-    console.log(e)
-  },
-  onChange9(e) {
-    this.setData({
-      zijin: e.detail.value,
-    })
-    console.log(e)
-  },
-  onChange10(e) {
-    this.setData({
-      caiwu: e.detail.value,
-    })
-    console.log(e)
+      jianyi: e.detail.value,
+    });
   },
 
-
-  bindzizuzhiChange: function (e) {
-    var value = e.detail.value, len = parseInt(value.length);
-    if (len > 300) return;
-    this.setData({
-      zizuzhi: e.detail.value,
-    });
-  },
-  bindxiangmushejiChange: function (e) {
-    var value = e.detail.value, len = parseInt(value.length);
-    if (len > 300) return;
-    this.setData({
-      xiangmusheji: e.detail.value,
-    });
-  },
-  bindzijinshiyongChange: function (e) {
-    var value = e.detail.value, len = parseInt(value.length);
-    if (len > 300) return;
-    this.setData({
-      zijinshiyong: e.detail.value,
-    });
-  },
-  switchTopreview_exmiddle: function () {
+  switchTopreview_serviceob: function () {
     wx.navigateTo({
-      url: '../preview_exmiddle/preview_exmiddle',
+      url: '../preview_serviceob/preview_serviceob',
     });
   },
   //提交表单数据
@@ -277,35 +234,30 @@ Page({
       return;
     }
     wx.request({
-      url: 'https://45053688.dashilarsqyz.com:/log/expert_middle/words',
+      url: 'https://45053688.dashilarsqyz.com:/log/serviceobject/words',
       method: "POST",
       data: {
         xingming: that.data.xingming,
         gongzuodanwei: that.data.gongzuodanwei,
         organization: that.data.organization,
-        neirong: that.data.neirong,
-        xuqiu: that.data.xuqiu,
-        liucheng: that.data.liucheng,
-        guocheng: that.data.guocheng,
-        xiaoguo: that.data.xiaoguo,
-        fugailv: that.data.fugailv,
-        fengong: that.data.fengong,
-        tuanjie: that.data.tuanjie,
-        zijin: that.data.zijin,
-        caiwu: that.data.caiwu,
-        zizuzhi: that.data.zizuzhi,
-        xiangmusheji: that.data.xiangmusheji,
-        zijinshiyong: that.data.zijinshiyong,
+        servicedate: that.data.servicedate,
+        servicetime: that.data.servicetime,
+        serviceplace: that.data.serviceplace,
+        q1: that.data.q1,
+        q2: that.data.q2,
+        q3: that.data.q3,
+        jianyi: that.data.jianyi,
         time: that.data.time,
         nickname: that.data.nickname
       },
       success: function (res) {
+        console.log(res);
         var ret_code = res.data.ret_code;
         if (ret_code === "0") {
           that.setData({
             submitSuccess: true,
           });
-          wx.removeStorageSync('expert_middleData');
+          wx.removeStorageSync('seviceobjectData');
           wx.redirectTo({
             url: '../mutualcomment_success/mutualcomment_success',
           });
@@ -319,6 +271,9 @@ Page({
             confirmText: '确定'
           })
         }
+      },
+      fail: function (res){
+        console.log(res);
       }
     })
   },
@@ -342,17 +297,44 @@ Page({
       });
       return false;
     }
-    if (this.data.organization == "请选择被评估组织") {
+    if (this.data.organization == "") {
       wx.showModal({
         title: '提示',
-        content: '请选择被评估组织',
+        content: '请选择举办此次活动的组织名称',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+    if (this.data.servicedate == "请选择活动日期") {
+      wx.showModal({
+        title: '提示',
+        content: '请选择活动日期',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+    if (this.data.servicetime == "请选择活动具体时间") {
+      wx.showModal({
+        title: '提示',
+        content: '请选择活动具体时间',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+    if (this.data.serviceplace == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请选择活动地点',
         showCancel: false, //不显示取消按钮
         confirmText: '确定'
       });
       return false;
     }
 
-    if (this.data.neirong == "") {
+    if (this.data.q1 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题1打分',
@@ -361,7 +343,7 @@ Page({
       });
       return false;
     }
-    if (this.data.xuqiu == "") {
+    if (this.data.q2 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题2打分',
@@ -370,73 +352,10 @@ Page({
       });
       return false;
     }
-    if (this.data.liucheng == "") {
+    if (this.data.q3 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题3打分',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.guocheng == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请对问题4打分',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.xiaoguo == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请对问题5打分',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.fugailv == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请对问题6打分',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.fengong == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请对问题7打分',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.tuanjie == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请对问题8打分',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.zijin == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请对问题9打分',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.caiwu == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请对问题10打分',
         showCancel: false, //不显示取消按钮
         confirmText: '确定'
       });

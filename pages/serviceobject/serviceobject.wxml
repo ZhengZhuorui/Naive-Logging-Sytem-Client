@@ -1,0 +1,110 @@
+<!--pages/serviceobject/serviceobject.wxml-->
+<!--pages/expert_end/expert_end.wxml-->
+<import src="../../components/gallery.wxml"/>
+<import src="../../components/picker-city/picker-city.wxml"/>
+
+<template is="gallery" data="{{ ...$wux.gallery }}"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center;font-size:40px">服务对象评估</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">活动基本情况</view>  
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">您的姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input value="{{xingming}}" class="weui-input" placeholder="请输入您的姓名" bindchange="bindxingmingChange" />
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所在单位</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input value="{{gongzuodanwei}}" class="weui-input" placeholder="请输入您所在的单位" bindchange="bindgongzuodanweiChange" />
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">活动地点</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input value="{{serviceplace}}" class="weui-input" placeholder="请输入活动地点" bindchange="bindPlaceChange" />
+        </view>
+    </view> 
+    <view class="weui-cell weui-cell_input" bindtap="bindOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">举办活动组织</view>
+        </view>
+          <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择举办活动组织" />
+    </view>    
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">服务日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{servicedate}}" bindchange="bindDateChange">
+            <view class="weui-input">{{servicedate}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">服务时间</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="time" value="{{servicetime}}" bindchange="bindTimeChange">
+            <view class="weui-input">{{servicetime}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">评估内容</view>
+    <wux-cell-group title="1">
+            <wux-cell title="本次活动生动有趣，很有意思。" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{q1}}" bind:change="onChange1"/>
+                  <text class="wux-rater__text">{{ q1 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="2">
+            <wux-cell title="我很喜欢这个活动。" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{q2}}" bind:change="onChange2"/>
+                  <text class="wux-rater__text">{{ q2 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="3">
+            <wux-cell title="我会把这个组织的活动推荐给我的朋友或家人。" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q3 }}" bind:change="onChange3"/>
+                  <text class="wux-rater__text">{{ q3 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <view class="weui-cells__title">对于此次活动您的建议或意见</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{jianyi}}" class="weui-textarea" placeholder="" row="8" bindinput="bindjianyiChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{jianyi.length}}/300</view>
+        </view>
+      </view>
+    </view>
+
+   
+    <view class="weui-btn-area">
+    <button class="weui-btn btn-mid" type="primary" plain='true' bindtap="switchTopreview_serviceob">预览</button>
+      <button class="weui-btn btn-mid" type="primary"  bindtap='submitAll'>提交</button>
+    </view>
+  </view>
+</view>
+
+

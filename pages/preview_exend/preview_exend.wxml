@@ -1,4 +1,4 @@
-<!--pages/preview_exmiddle/preview_exmiddle.wxml-->
+<!--pages/preview_exend/preview_exend.wxml-->
 <view class="page">
     <view class="page__hd">
         <view class="page__title">提交预览</view>
@@ -21,58 +21,58 @@
             </view>
             <view class="weui-form-preview__bd">
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">活动设计</view>
-                    <view class="weui-form-preview__value">{{neirong}}</view>
+                    <view class="weui-form-preview__label">组织情况</view>
+                    <view class="weui-form-preview__value">{{q1}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">符合需求</view>
-                    <view class="weui-form-preview__value">{{xuqiu}}</view>
+                    <view class="weui-form-preview__label">项目执行情况</view>
+                    <view class="weui-form-preview__value">{{q2}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">活动流程</view>
-                    <view class="weui-form-preview__value">{{liucheng}}</view>
+                    <view class="weui-form-preview__label">组织管理规范</view>
+                    <view class="weui-form-preview__value">{{q3}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">准备充分</view>
-                    <view class="weui-form-preview__value">{{guocheng}}</view>
+                    <view class="weui-form-preview__label">项目目标</view>
+                    <view class="weui-form-preview__value">{{q4}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">活动效果</view>
-                    <view class="weui-form-preview__value">{{xiaoguo}}</view>
+                    <view class="weui-form-preview__label">项目活动情况</view>
+                    <view class="weui-form-preview__value">{{q5}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">受益群体情况</view>
-                    <view class="weui-form-preview__value">{{fugailv}}</view>
+                    <view class="weui-form-preview__label">项目效果</view>
+                    <view class="weui-form-preview__value">{{q6}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">组织分工情况</view>
-                    <view class="weui-form-preview__value">{{fengong}}</view>
+                    <view class="weui-form-preview__label">项目服务性</view>
+                    <view class="weui-form-preview__value">{{q7}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">组织管理情况</view>
-                    <view class="weui-form-preview__value">{{tuanjie}}</view>
+                    <view class="weui-form-preview__label">资金使用规范</view>
+                    <view class="weui-form-preview__value">{{q8}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">资金支出规范</view>
-                    <view class="weui-form-preview__value">{{zijin}}</view>
+                    <view class="weui-form-preview__label">资金报销规范</view>
+                    <view class="weui-form-preview__value">{{q9}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">财务票据规范</view>
-                    <view class="weui-form-preview__value">{{caiwu}}</view>
+                    <view class="weui-form-preview__label">筹集外部资源</view>
+                    <view class="weui-form-preview__value">{{q10}}</view>
                 </view>
             </view>
             <view class="weui-form-preview__hd">
                 <view class="weui-form-preview__item">
                     <view class="weui-form-preview__label">您对自组织的建议</view>
-                    <view class="weui-form-preview__value_in-hd">{{zizuzhi}}</view>
+                    <view class="weui-form-preview__value_in-hd">{{jianyi1}}</view>
                 </view>
                 <view class="weui-form-preview__item">
                     <view class="weui-form-preview__label">您对项目设计及项目管理的建议</view>
-                    <view class="weui-form-preview__value_in-hd">{{xiangmusheji}}</view>
+                    <view class="weui-form-preview__value_in-hd">{{jianyi2}}</view>
                 </view>
                 <view class="weui-form-preview__item">
                     <view class="weui-form-preview__label">您对资金使用及预算编制的建议</view>
-                    <view class="weui-form-preview__value_in-hd">{{zijinshiyong}}</view>
+                    <view class="weui-form-preview__value_in-hd">{{jianyi3}}</view>
                 </view>
             </view>
             <view class="weui-form-preview__ft">
@@ -81,4 +81,5 @@
         </view>
     </view>
 </view>
+
 

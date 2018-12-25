@@ -1,5 +1,4 @@
-<!--pages/preview_mcend/preview_mcend.wxml-->
-<!--pages/preview_mcbegin/preview_mcbegin.wxml-->
+<!--pages/preview_selfevaluation/preview_selfevaluation.wxml-->
 <view class="page">
     <view class="page__hd">
         <view class="page__title">提交预览</view>
@@ -9,44 +8,57 @@
             <view class="weui-form-preview__hd">
                 <view class="weui-form-preview__item">
                     <view class="weui-form-preview__label">您所在的组织名称</view>
-                    <view class="weui-form-preview__value_in-hd">{{yourorganization}}</view>
+                    <view class="weui-form-preview__value_in-hd">{{organization}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">被评估组织名称</view>
-                    <view class="weui-form-preview__value_in-hd">{{organization}}</view>
+                    <view class="weui-form-preview__label">您的姓名</view>
+                    <view class="weui-form-preview__value_in-hd">{{name}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">您在组织内的职务</view>
+                    <view class="weui-form-preview__value_in-hd">{{identity}}</view>
                 </view>
             </view>
             <view class="weui-form-preview__bd">
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">组织内部情况</view>
+                    <view class="weui-form-preview__label">组织情况</view>
                     <view class="weui-form-preview__value">{{q1}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">完成项目情况</view>
+                    <view class="weui-form-preview__label">独立执行项目</view>
                     <view class="weui-form-preview__value">{{q2}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">项目效果</view>
+                    <view class="weui-form-preview__label">组织管理情况</view>
                     <view class="weui-form-preview__value">{{q3}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">资金使用情况</view>
+                    <view class="weui-form-preview__label">项目活动情况</view>
                     <view class="weui-form-preview__value">{{q4}}</view>
                 </view>
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">外部资源筹集</view>
+                    <view class="weui-form-preview__label">项目目标效果</view>
                     <view class="weui-form-preview__value">{{q5}}</view>
                 </view>
-            </view>
-            <view class="weui-form-preview__hd">
                 <view class="weui-form-preview__item">
-                    <view class="weui-form-preview__label">您的建议</view>
-                    <view class="weui-form-preview__value_in-hd">{{jianyi}}</view>
+                    <view class="weui-form-preview__label">项目服务效果</view>
+                    <view class="weui-form-preview__value">{{q6}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">项目资金规范</view>
+                    <view class="weui-form-preview__value">{{q7}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">项目资金报销</view>
+                    <view class="weui-form-preview__value">{{q8}}</view>
                 </view>
             </view>
+            
             <view class="weui-form-preview__ft">
                 <navigator  class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap='switchBack'>返回</navigator>
             </view>
         </view>
     </view>
 </view>
+
+

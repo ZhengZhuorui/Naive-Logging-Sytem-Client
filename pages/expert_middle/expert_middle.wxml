@@ -24,7 +24,7 @@
           <view class="weui-label">所在单位</view>
         </view>
         <view class="weui-cell__bd">
-          <input value="{{suozaidanwei}}" class="weui-input" placeholder="请输入您所在的单位" bindchange="bindsuozaidanweiChange" />
+          <input value="{{gongzuodanwei}}" class="weui-input" placeholder="请输入您所在的单位" bindchange="bindgongzuodanweiChange" />
         </view>
     </view>
     <view class="weui-cells__title" style="text-align:center;font-size:30px">被评估组织名称</view>        

@@ -1,81 +1,67 @@
-// pages/expert_middle/expert_middle.js
+// pages/self_evaluation/self_evaluation.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
 
-var util = require('../../utils/util.js');
+var util = require('../../utils/util.js'); 
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    xingming:"",
-    gongzuodanwei:"",
-    organization:"请选择被评估组织",
-    neirong:"",
-    xuqiu:"",
-    liucheng:"",
-    guocheng:"",
-    xiaoguo:"",
-    fugailv:"",
-    fengong:"",
-    tuanjie:"",
-    zijin:"",
-    caiwu:"",
-    zizuzhi:"",
-    xiangmusheji:"",
-    zijinshiyong:"",
-    time:"",
-    nickname:""
+    radioidentityItems: [
+      { name: '组织负责人（核心组成员）', value: "组织负责人（核心组成员）", checked: true},
+      { name: '财务负责人（核心组成员）', value: "财务负责人（核心组成员）"},
+      { name: '其他核心组成员', value: "其他核心组成员"},
+      { name: '一般成员', value: "一般成员"},
+    ],
+    organization:"您所在的组织名称",
+    name:"",
+    q1:"",
+    q2:"",
+    q3:"",
+    q4:"",
+    q5:"",
+    q6:"",
+    q7:"",
+    q8:"",
+    identity:"组织负责人（核心组成员）", 
+    time:""
+
   },
 
   /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+    * 生命周期函数--监听页面加载
+    */
+  onLoad: function () {
     var that = this;
-    var expert_middleData = wx.getStorageSync('expert_middleData');
-    if(expert_middleData){
-      this.setData({
-        xingming: expert_middleData.xingming,
-        gongzuodanwei: expert_middleData.gongzuodanwei,
-        organization: expert_middleData.organization,
-        neirong: expert_middleData.neirong,
-        xuqiu: expert_middleData.xuqiu,
-        liucheng: expert_middleData.liucheng,
-        guocheng: expert_middleData.guocheng,
-        xiaoguo: expert_middleData.xiaoguo,
-        fugailv: expert_middleData.fugailv,
-        fengong: expert_middleData.fengong,
-        tuanjie: expert_middleData.tuanjie,
-        zijin: expert_middleData.zijin,
-        caiwu: expert_middleData.caiwu,
-        zizuzhi: expert_middleData.zizuzhi,
-        xiangmusheji: expert_middleData.xiangmusheji,
-        zijinshiyong: expert_middleData.zijinshiyong,
-        time: expert_middleData.time,
-        nickname: expert_middleData.nickname
-      })
-    }
+    var self_evaluationData = wx.getStorageSync('self_evaluationData');
     var time = util.getNowFormatDate();
     this.setData({
       time: time
     }
     );
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res);
-        var avatarUrl = 'userInfo.avatarUrl';
-        var nickName = 'userInfo.nickName';
-        that.setData({
-          avatarUrl: res.userInfo.avatarUrl,
-          nickname: res.userInfo.nickName,
-        });
-        console.log(nickname);
-      }
-    })
+    if (self_evaluationData) {
+      this.setData({
+        organization: self_evaluationData.organization,
+        name: self_evaluationData.name,
+        time: self_evaluationData.time,
+        q1: self_evaluationData.q1,
+        q2: self_evaluationData.q2,
+        q3: self_evaluationData.q3,
+        q4: self_evaluationData.q4,
+        q5: self_evaluationData.q5,
+        q6: self_evaluationData.q6,
+        q7: self_evaluationData.q7,
+        q8: self_evaluationData.q8,
+        identity: self_evaluationData.identity
+      });
+    }
 
   },
+
+
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -92,8 +78,8 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
+  * 生命周期函数--监听页面隐藏
+  */
   onHide: function () {
     var that = this;
     this.setData({
@@ -101,14 +87,12 @@ Page({
     });
     if (!that.data.submitSuccess) {
       wx.setStorage({
-        key: 'expert_middleData',
+        key: 'self_evaluationData',
         data: this.data,
       });
     }
 
   },
-
-
 
   /**
    * 生命周期函数--监听页面卸载
@@ -120,7 +104,7 @@ Page({
         showContent: true
       });
       wx.setStorage({
-        key: 'expert_middleData',
+        key: 'self_evaluationData',
         data: this.data,
       });
     }
@@ -146,25 +130,22 @@ Page({
   onShareAppMessage: function () {
 
   },
-  /*姓名和所在单位监听器*/
-  bindxingmingChange: function (e) {
+
+  /*姓名监听器*/
+  bindnameChange: function (e) {
     this.setData({
-      xingming: e.detail.value
+      name: e.detail.value
     });
   },
-  bindgongzuodanweiChange: function (e) {
-    this.setData({
-      gongzuodanwei: e.detail.value
-    });
-  },
-  /*选择被评估组织名称*/
-  bindOrganizationPickerChange:function(){
+  
+  /*选择所在组织名称*/
+  bindOrganizationPickerChange: function (e) {
     var that = this;
     this.setData({
       showContent: false
     });
     $wuxPickerCity.init('city', {
-      title: '请选择被评估组织名称',
+      title: '您所在的组织名称',
       value: [8, 0, 11],
       onChange(p) {
         console.log(p);
@@ -179,95 +160,70 @@ Page({
         });
       }
     });
-},
+  },
   onChange1(e) {
     this.setData({
-      neirong: e.detail.value,
+      q1: e.detail.value,
     })
     console.log(e)
   },
   onChange2(e) {
     this.setData({
-      xuqiu: e.detail.value,
+      q2: e.detail.value,
     })
     console.log(e)
   },
   onChange3(e) {
     this.setData({
-      liucheng: e.detail.value,
+      q3: e.detail.value,
     })
     console.log(e)
   },
   onChange4(e) {
     this.setData({
-      guocheng: e.detail.value,
+      q4: e.detail.value,
     })
     console.log(e)
   },
   onChange5(e) {
     this.setData({
-      xiaoguo: e.detail.value,
+      q5: e.detail.value,
     })
     console.log(e)
   },
   onChange6(e) {
     this.setData({
-      fugailv: e.detail.value,
+      q6: e.detail.value,
     })
     console.log(e)
   },
   onChange7(e) {
     this.setData({
-      fengong: e.detail.value,
+      q7: e.detail.value,
     })
     console.log(e)
   },
   onChange8(e) {
     this.setData({
-      tuanjie: e.detail.value,
-    })
-    console.log(e)
-  },
-  onChange9(e) {
-    this.setData({
-      zijin: e.detail.value,
-    })
-    console.log(e)
-  },
-  onChange10(e) {
-    this.setData({
-      caiwu: e.detail.value,
+      q8: e.detail.value,
     })
     console.log(e)
   },
 
+  identityChange: function (e) {
+    console.log(e.detail.value);
+    this.setData({
+      identity: e.detail.value
+    });
+  },
 
-  bindzizuzhiChange: function (e) {
-    var value = e.detail.value, len = parseInt(value.length);
-    if (len > 300) return;
-    this.setData({
-      zizuzhi: e.detail.value,
-    });
-  },
-  bindxiangmushejiChange: function (e) {
-    var value = e.detail.value, len = parseInt(value.length);
-    if (len > 300) return;
-    this.setData({
-      xiangmusheji: e.detail.value,
-    });
-  },
-  bindzijinshiyongChange: function (e) {
-    var value = e.detail.value, len = parseInt(value.length);
-    if (len > 300) return;
-    this.setData({
-      zijinshiyong: e.detail.value,
-    });
-  },
-  switchTopreview_exmiddle: function () {
+/*转入预览页面*/
+  switchTopreview_selfevaluation: function () {
     wx.navigateTo({
-      url: '../preview_exmiddle/preview_exmiddle',
+      url: '../preview_selfevaluation/preview_selfevaluation',
     });
   },
+
   //提交表单数据
   submitAll: function () {
     var that = this;
@@ -277,27 +233,21 @@ Page({
       return;
     }
     wx.request({
-      url: 'https://45053688.dashilarsqyz.com:/log/expert_middle/words',
+      url: 'https://45053688.dashilarsqyz.com:/log/self_evaluation/words',
       method: "POST",
       data: {
-        xingming: that.data.xingming,
-        gongzuodanwei: that.data.gongzuodanwei,
-        organization: that.data.organization,
-        neirong: that.data.neirong,
-        xuqiu: that.data.xuqiu,
-        liucheng: that.data.liucheng,
-        guocheng: that.data.guocheng,
-        xiaoguo: that.data.xiaoguo,
-        fugailv: that.data.fugailv,
-        fengong: that.data.fengong,
-        tuanjie: that.data.tuanjie,
-        zijin: that.data.zijin,
-        caiwu: that.data.caiwu,
-        zizuzhi: that.data.zizuzhi,
-        xiangmusheji: that.data.xiangmusheji,
-        zijinshiyong: that.data.zijinshiyong,
+        organization: that.data.organization,//评估者所在组织
+        name:that.data.name,
+        zhiwu:that.data.zhiwu,
         time: that.data.time,
-        nickname: that.data.nickname
+        q1: that.data.q1, //问题1
+        q2: that.data.q2,      //问题2
+        q3: that.data.q3,      //问题3
+        q4: that.data.q4,       //问题4
+        q5: that.data.q5,       //问题5
+        q6: that.data.q6,
+        q7: that.data.q7,
+        q8: that.data.q8,
       },
       success: function (res) {
         var ret_code = res.data.ret_code;
@@ -305,7 +255,7 @@ Page({
           that.setData({
             submitSuccess: true,
           });
-          wx.removeStorageSync('expert_middleData');
+          wx.removeStorageSync('self_evaluationData');
           wx.redirectTo({
             url: '../mutualcomment_success/mutualcomment_success',
           });
@@ -324,35 +274,27 @@ Page({
   },
 
   validate: function () {
-    if (this.data.xingming == "") {
+    if (this.data.name == "") {
       wx.showModal({
         title: '提示',
-        content: '请填写您的名字',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.gongzuodanwei == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请填写您的工作单位',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.organization == "请选择被评估组织") {
-      wx.showModal({
-        title: '提示',
-        content: '请选择被评估组织',
+        content: '请填写您的姓名',
         showCancel: false, //不显示取消按钮
         confirmText: '确定'
       });
       return false;
     }
 
-    if (this.data.neirong == "") {
+    if (this.data.organization == "您所在的组织名称") {
+      wx.showModal({
+        title: '提示',
+        content: '请选择您所在的组织名称',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+
+    if (this.data.q1 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题1打分',
@@ -361,7 +303,7 @@ Page({
       });
       return false;
     }
-    if (this.data.xuqiu == "") {
+    if (this.data.q2 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题2打分',
@@ -370,7 +312,7 @@ Page({
       });
       return false;
     }
-    if (this.data.liucheng == "") {
+    if (this.data.q3 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题3打分',
@@ -379,7 +321,7 @@ Page({
       });
       return false;
     }
-    if (this.data.guocheng == "") {
+    if (this.data.q4 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题4打分',
@@ -388,7 +330,7 @@ Page({
       });
       return false;
     }
-    if (this.data.xiaoguo == "") {
+    if (this.data.q5 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题5打分',
@@ -397,7 +339,7 @@ Page({
       });
       return false;
     }
-    if (this.data.fugailv == "") {
+    if (this.data.q6 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题6打分',
@@ -406,7 +348,7 @@ Page({
       });
       return false;
     }
-    if (this.data.fengong == "") {
+    if (this.data.q7 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题7打分',
@@ -415,7 +357,7 @@ Page({
       });
       return false;
     }
-    if (this.data.tuanjie == "") {
+    if (this.data.q8 == "") {
       wx.showModal({
         title: '提示',
         content: '请对问题8打分',
@@ -424,19 +366,10 @@ Page({
       });
       return false;
     }
-    if (this.data.zijin == "") {
+    if (this.data.identity == "") {
       wx.showModal({
         title: '提示',
-        content: '请对问题9打分',
-        showCancel: false, //不显示取消按钮
-        confirmText: '确定'
-      });
-      return false;
-    }
-    if (this.data.caiwu == "") {
-      wx.showModal({
-        title: '提示',
-        content: '请对问题10打分',
+        content: '请选择您的职务',
         showCancel: false, //不显示取消按钮
         confirmText: '确定'
       });

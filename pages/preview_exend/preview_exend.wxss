@@ -1,4 +1,4 @@
-/* pages/preview_mcend/preview_mcend.wxss */
+/* pages/preview_exend/preview_exend.wxss */
 .weui-form-preview{
     margin-bottom: 25px;
 }

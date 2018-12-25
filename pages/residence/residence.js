@@ -9,8 +9,8 @@ Page({
     organization: "请选择组织名称",
     joinNumber: "", //参加人数
     location: "",
-    date: "请点击选择日期",
-    time: "请点击选择时间",
+    date: "活动开始日期，非填写小程序日期",
+    time: "活动开始时间，非填写小程序时间",
     theme: "",
     content: "",
 
@@ -20,6 +20,8 @@ Page({
 
     //活动照片的url列表
     activityPhotoUrls: [],
+    //活动精彩瞬间
+    momentsPhotoUrls:[],
     //微创投照片的URL列表
     sheetPhotoUrls: [],
 
@@ -75,6 +77,7 @@ Page({
         other: residenceData.other,
 
         activityPhotoUrls: residenceData.activityPhotoUrls,
+        momentsPhotoUrls: residenceData.momentsPhotoUrls,
         sheetPhotoUrls: residenceData.sheetPhotoUrls,
 
         indexOrganization: residenceData.indexOrganization,
@@ -284,12 +287,12 @@ Page({
   },
 
 
-  /* 上传活动时候的照片 */
+  /* 上传活动大合影 */
   chooseActivityImage: function (e) {
     var that = this;
-    if(that.data.activityPhotoUrls.length<10){
+    if(that.data.activityPhotoUrls.length<1){
     wx.chooseImage({
-      count:10,//一次可以选择的最多图片数
+      count:1,//一次可以选择的最多图片数
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -303,19 +306,44 @@ Page({
     }else{
       wx.showModal({
         title: '提示',
-        content: '最多上传10张图片',
+        content: '最多上传1张图片',
         showCancel: false, //不显示取消按钮
         confirmText: '确定'
       }); 
     }
   },
+  /* 上传活动精彩瞬间 */
+  chooseMomentsImage: function (e) {
+    var that = this;
+    if (that.data.momentsPhotoUrls.length < 2) {
+      wx.chooseImage({
+        count: 2,//一次可以选择的最多图片数
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          that.setData({
+            momentsPhotoUrls: that.data.momentsPhotoUrls.concat(res.tempFilePaths),
+          });
+
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '最多上传2张图片',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+    }
+  },
 
   /* 上传微创投表图片 */
-  chooseSheetImage: function (e) {
+  choosesheetImage: function (e) {
     var that = this;
-    if (that.data.sheetPhotoUrls.length < 10) {
+    if (that.data.sheetPhotoUrls.length < 2) {
     wx.chooseImage({
-      count: 10,//一次可以选择的最多图片数
+      count: 2,//一次可以选择的最多图片数
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -329,7 +357,7 @@ Page({
     } else {
       wx.showModal({
         title: '提示',
-        content: '最多上传10张图片',
+        content: '最多上传2张图片',
         showCancel: false, //不显示取消按钮
         confirmText: '确定'
       });
@@ -345,7 +373,11 @@ Page({
     var urls = [];
     if (photo_type === "activity") {
       urls = this.data.activityPhotoUrls;
-    } else {
+    } 
+    else if (photo_type === "moments") {
+      urls = this.data.momentsPhotoUrls;
+    } 
+    else {
       urls = this.data.sheetPhotoUrls;
     }
     this.setData({ isGalleryOpen: true });
@@ -361,7 +393,14 @@ Page({
             activityPhotoUrls: urls,
             isGalleryOpen: false,
           });
-        } else {
+        } 
+        else if (photo_type === "moments") {
+          this.setData({
+            momentsPhotoUrls: urls,
+            isGalleryOpen: false,
+          });
+        } 
+        else {
           this.setData({
             sheetPhotoUrls: urls,
             isGalleryOpen: false,
@@ -418,7 +457,7 @@ Page({
         var ret_code = res.data.ret_code;
         if(ret_code==="0"){
           /* 提交表单信息成功，下面判断是否需要提交图片 */
-          var photoNum = that.data.activityPhotoUrls.length + that.data.sheetPhotoUrls.length;
+          var photoNum = that.data.activityPhotoUrls.length + that.data.momentsPhotoUrls.length + that.data.sheetPhotoUrls.length;
           
           if (photoNum == 0) {
             /* 没有传图片，只发表感受 -> 把本地缓存清空，跳转到提交成功页面 */
@@ -445,6 +484,12 @@ Page({
               var dic = {};
               dic['path'] = that.data.activityPhotoUrls[i];
               dic['type'] = 'activity';
+              filePaths.push(dic);
+            }
+            for (var i = 0; i < that.data.momentsPhotoUrls.length; i++) {
+              var dic = {};
+              dic['path'] = that.data.momentsPhotoUrls[i];
+              dic['type'] = 'moments';
               filePaths.push(dic);
             }
             for (var i = 0; i < that.data.sheetPhotoUrls.length; i++) {
@@ -565,6 +610,46 @@ Page({
       wx.showModal({
         title: '提示',
         content: '请输入您的感受',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+    /*参与人数*/
+    if (this.data.joinNumber === "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写参与人数',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+    /*地点 */
+    if (this.data.location === "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写活动地点',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+    /*活动主题*/
+    if (this.data.theme === "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写活动主题',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+    /*活动内容 */
+    if (this.data.content === "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写活动内容',
         showCancel: false, //不显示取消按钮
         confirmText: '确定'
       });

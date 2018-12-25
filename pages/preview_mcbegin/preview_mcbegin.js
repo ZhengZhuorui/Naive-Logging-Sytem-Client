@@ -46,7 +46,7 @@ Page({
         that.setData({
           yourorganization: mutualcomment_beginData.yourorganization,
           organization: mutualcomment_beginData.organization,
-          //time: mutualcomment_beginData.time,
+          time: mutualcomment_beginData.time,
           fengong: mutualcomment_beginData.fengong,
           chongdie: mutualcomment_beginData.chongdie,
           fuwu: mutualcomment_beginData.fuwu,

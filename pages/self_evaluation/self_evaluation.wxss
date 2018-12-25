@@ -1,5 +1,4 @@
-/* pages/mutualcomment_end/mutualcomment_end.wxss */
-
+/* pages/self_evaluation/self_evaluation.wxss */
 .swiper-tab{
     width: 100%;    
     text-align: center;  

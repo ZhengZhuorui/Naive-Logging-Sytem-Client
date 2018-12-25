@@ -1,19 +1,22 @@
-// pages/preview_mcend/preview_mcend.js
+// pages/preview_selfevaluation/preview_selfevaluation.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    yourorganization: "请选择您所在的组织名称",
-    organization: "请选择被评估组织名称",
-    time: "",
+    organization: "您所在的组织名称",
+    name: "",
     q1: "",
     q2: "",
     q3: "",
     q4: "",
     q5: "",
-    jianyi: ""
+    q6: "",
+    q7: "",
+    q8: "",
+    identity: false,
+    time: ""
   },
 
   /**
@@ -35,24 +38,26 @@ Page({
    */
   onShow: function () {
     var that = this;
-    var mutualcomment_endData;
+    var self_evaluationData;
     wx.getStorage({
-      key: 'mutualcomment_endData',
+      key: 'self_evaluationData',
       success: function (res) {
-        mutualcomment_endData = res.data;
-        console.log(mutualcomment_endData);
-        //读取本地存储的组织互评信息信息，放入本页Page.data
-        console.log("[PREVIEW] read mutualcomment_endData from local storage");
+        self_evaluationData = res.data;
+        console.log(self_evaluationData);
+        //读取本地存储的组织评估信息，放入本页Page.data
+        console.log("[PREVIEW] read self_evaluationData from local storage");
         that.setData({
-          yourorganization: mutualcomment_endData.yourorganization,
-          organization: mutualcomment_endData.organization,
-          time: mutualcomment_endData.time,
-          q1: mutualcomment_endData.q1,
-          q2: mutualcomment_endData.q2,
-          q3: mutualcomment_endData.q3,
-          q4: mutualcomment_endData.q4,
-          q5: mutualcomment_endData.q5,
-          jianyi: mutualcomment_endData.jianyi,
+          organization: self_evaluationData.organization,
+          name: self_evaluationData.name,
+          identity: self_evaluationData.identity,
+          q1: self_evaluationData.q1,
+          q2: self_evaluationData.q2,
+          q3: self_evaluationData.q3,
+          q4: self_evaluationData.q4,
+          q5: self_evaluationData.q5,
+          q6: self_evaluationData.q6,
+          q7: self_evaluationData.q7,
+          q8: self_evaluationData.q8,
         });
       },
     })

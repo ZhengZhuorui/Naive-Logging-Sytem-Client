@@ -1,0 +1,120 @@
+<!--pages/self_evaluation/self_evaluation.wxml-->
+<import src="../../components/gallery.wxml"/>
+<import src="../../components/picker-city/picker-city.wxml"/>
+
+<template is="gallery" data="{{ ...$wux.gallery }}"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center;font-size:40px">组织自评</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">基本信息</view>        
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">被评估组织</view>
+        </view>
+        <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择被评估组织名称" />
+      </view>
+    </view>
+
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">您的姓名</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input value="{{name}}" class="weui-input" placeholder="请输入您的姓名" bindchange="bindnameChange" />
+        </view>
+    </view>
+
+    <view class="weui-cells__title" >请选择您在组织内的职务</view>
+    <view class="weui-cells weui-cells_after-title">
+    <view>
+      <radio-group bindchange="identityChange">
+        <label class="weui-cell weui-check__label" wx:for="{{radioidentityItems}}">
+              <radio value="{{item.value}}"  checked="{{item.checked}}"/>{{item.name}}
+        </label>
+      </radio-group>
+    </view>
+    </view>
+
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">评估内容</view>
+    <wux-cell-group title="1">
+            <wux-cell title="组织内有5位及以上的骨干成员，能够参与式协商组织内部的事务" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{q1}}" bind:change="onChange1"/>
+                  <text class="wux-rater__text">{{ q1 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="2">
+            <wux-cell title="组织能够独立执行项目，且有社会资源协调能力，助力项目开展，且有计划继续发展该组织" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{q2}}" bind:change="onChange2"/>
+                  <text class="wux-rater__text">{{ q2 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="3">
+            <wux-cell title="组织成员能够协作完成项目档案资料，可以利用小程序及微信群等方式管理组织事务" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q3 }}" bind:change="onChange3"/>
+                  <text class="wux-rater__text">{{ q3 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="4">
+            <wux-cell title="项目活动时间、次数及内容与计划一致，若有调整，理由较充分" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q4 }}" bind:change="onChange4"/>
+                  <text class="wux-rater__text">{{ q4 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="5">
+            <wux-cell title="项目目标基本实现，且项目具有可持续性，将继续开展该项目" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q5 }}" bind:change="onChange5"/>
+                  <text class="wux-rater__text">{{ q5 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="6">
+            <wux-cell title="项目服务效果受到受益人肯定，服务对象人数及人次与原计划一致" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q6 }}" bind:change="onChange6"/>
+                  <text class="wux-rater__text">{{ q6 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="7">
+            <wux-cell title="项目资金申报规范，基本无调整情况，若有调整，理由较充分" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q7 }}" bind:change="onChange7"/>
+                  <text class="wux-rater__text">{{ q7 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="8">
+            <wux-cell title="项目资金报销凭证规范且报销及时，报销金额和报销时间与项目计划一致" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q8 }}" bind:change="onChange8"/>
+                  <text class="wux-rater__text">{{ q8 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+   
+    <view class="weui-btn-area">
+    <button class="weui-btn btn-mid" type="primary" plain='true' bindtap="switchTopreview_selfevaluation">预览</button>
+      <button class="weui-btn btn-mid" type="primary"  bindtap='submitAll'>提交</button>
+    </view>
+  </view>
+
+</view>
+
+
+
+

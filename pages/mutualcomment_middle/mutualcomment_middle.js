@@ -47,12 +47,18 @@ Page({
       time: time
     }
     );
-    if (!that.data.submitSuccess) {
-      wx.setStorage({
-        key: 'mutualcomment_middleData',
-        data: this.data,
-      });
-    }
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(res);
+        var avatarUrl = 'userInfo.avatarUrl';
+        var nickName = 'userInfo.nickName';
+        that.setData({
+          avatarUrl: res.userInfo.avatarUrl,
+          nickname: res.userInfo.nickName,
+        });
+        console.log(nickname);
+      }
+    })
 
   },
 
@@ -90,21 +96,7 @@ Page({
 
   },
 
-  onLoad: function (options) {
-    var that = this;
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res);
-        var avatarUrl = 'userInfo.avatarUrl';
-        var nickName = 'userInfo.nickName';
-        that.setData({
-          avatarUrl: res.userInfo.avatarUrl,
-          nickname: res.userInfo.nickName,
-        });
-        console.log(nickname);
-     }
-    })
-  },
+  
 
   /**
    * 生命周期函数--监听页面卸载
@@ -280,6 +272,15 @@ Page({
   },
 
   validate: function () {
+    if (this.data.organization == this.data.yourorganization) {
+      wx.showModal({
+        title: '提示',
+        content: '您所在的组织和被评估组织相同，请重新选择',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
 
     if (this.data.organization == "请选择被评估组织名称") {
       wx.showModal({
@@ -290,7 +291,7 @@ Page({
       });
       return false;
     }
-    if (this.data.organization == "请选择您所在的组织名称") {
+    if (this.data.yourorganization == "请选择您所在的组织名称") {
       wx.showModal({
         title: '提示',
         content: '请选择您所在的组织名称',

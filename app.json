@@ -22,7 +22,13 @@
     "pages/expert_begin/expert_begin",
     "pages/expert_middle/expert_middle",
     "pages/expert_end/expert_end",
-    "pages/preview_exmiddle/preview_exmiddle"
+    "pages/preview_exbegin/preview_exbegin",
+    "pages/preview_exmiddle/preview_exmiddle",
+    "pages/preview_exend/preview_exend",
+    "pages/self_evaluation/self_evaluation",
+    "pages/preview_selfevaluation/preview_selfevaluation",
+    "pages/serviceobject/serviceobject",
+    "pages/preview_serviceob/preview_serviceob"
   ],
   "window": {
     "backgroundTextStyle": "light",

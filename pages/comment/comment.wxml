@@ -5,7 +5,7 @@
     </view>
     <view class="page__bd">
         <view class="icon-box">
-            <icon bindtap="switchToMutualcomment" type="success" size="61"></icon>
+            <icon bindtap="switchToMutualcomment" type="success" size="50"></icon>
             <view class="icon-box__ctn">
                 <view class="icon-box__title">组织互评</view>
                 <view class="icon-box__desc"></view>
@@ -13,7 +13,7 @@
         </view>
         
         <view class="icon-box">
-            <icon bindtap="switchToNot_existed" type="waiting" size="61"></icon>
+            <icon bindtap="switchToSelfevaluation" type="waiting" size="50"></icon>
             <view class="icon-box__ctn">
                 <view class="icon-box__title">组织自评</view>
                 <view class="icon-box__desc"></view>
@@ -21,12 +21,19 @@
         </view>
 
         <view class="icon-box">
-            <icon bindtap="switchToexpert" type="info" size="61" color="orange"></icon>
+            <icon bindtap="switchToexpert" type="info" size="50" color="orange"></icon>
             <view class="icon-box__ctn">
                 <view class="icon-box__title">专家评估</view>
                 <view class="icon-box__desc"></view>
             </view>
         </view>
         
+        <view class="icon-box">
+            <icon bindtap="switchToserviceobject" type="download" size="50" color="rgb(0,255,255)"></icon>
+            <view class="icon-box__ctn">
+                <view class="icon-box__title">服务对象评估</view>
+                <view class="icon-box__desc"></view>
+            </view>
+        </view>
     </view>
 </view>

@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    xingming: "请填写您的姓名",
-    gongzuodanwei: "请填写您的工作单位",
+    xingming: "",
+    gongzuodanwei: "",
     organization: "请选择被评估组织",
     neirong: "",
     xuqiu: "",
@@ -52,7 +52,7 @@ Page({
         console.log(expert_middleData);
         //读取本地存储的组织互评信息信息，放入本页Page.data
         console.log("[PREVIEW] read expert_middleData from local storage");
-        this.setData({
+        that.setData({
           xingming: expert_middleData.xingming,
           gongzuodanwei: expert_middleData.gongzuodanwei,
           organization: expert_middleData.organization,

@@ -27,7 +27,7 @@
           <view class="weui-label">参与人数</view>
         </view>
         <view class="weui-cell__bd">
-          <input value="{{joinNumber}}" class="weui-input" placeholder="请输入参与人数" bindchange="bindJoinNumberChange" />
+          <input type="number" value="{{joinNumber}}" class="weui-input" placeholder="请与负责人确认后填写" bindchange="bindJoinNumberChange" />
         </view>
       </view>
 
@@ -67,7 +67,7 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <view class="weui-cell__bd">
-          <input value="{{theme}}" class="weui-input" placeholder="请输入主题" bindchange="bindThemeChange" />
+          <input value="{{theme}}" class="weui-input" placeholder="请与活动负责人确认后填写" bindchange="bindThemeChange" />
         </view>
       </view>
     </view>
@@ -94,7 +94,7 @@
     </view>
 
 
-    <view class="weui-cells__title">感悟</view>
+    <view class="weui-cells__title">参加活动后的感受</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
@@ -104,7 +104,7 @@
       </view>
     </view>
 
-    <view class="weui-cells__title">背景介绍</view>
+    <view class="weui-cells__title">活动背景</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
@@ -113,6 +113,7 @@
         </view>
       </view>
     </view>
+
   </view>
 
   <view wx:if="{{showPage3}}" class='page-view page__bd'>
@@ -122,8 +123,8 @@
           <view class="weui-cell__bd">
             <view class="weui-uploader">
               <view class="weui-uploader__hd">
-                <view class="weui-uploader__title">活动精彩瞬间</view>
-                <view class="weui-uploader__info">{{activityPhotoUrls.length}}/10</view>
+                <view class="weui-uploader__title">活动大合影(请精选上传一张活动合照)</view>
+                <view class="weui-uploader__info">{{activityPhotoUrls.length}}/1</view>
               </view>
               <view class="weui-uploader__bd">
                 <view class="weui-uploader__files" id="uploaderFiles">
@@ -152,8 +153,38 @@
           <view class="weui-cell__bd">
             <view class="weui-uploader">
               <view class="weui-uploader__hd">
-                <view class="weui-uploader__title">微创投记录</view>
-                <view class="weui-uploader__info">{{sheetPhotoUrls.length}}/10</view>
+                <view class="weui-uploader__title">活动精彩瞬间(请精选两张活动过程的代表性照片)</view>
+                <view class="weui-uploader__info">{{momentsPhotoUrls.length}}/2</view>
+              </view>
+              <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                  <block wx:for-items="{{momentsPhotoUrls}}" wx:key="{{index}}">
+                    <view class="weui-uploader__file" bindtap="showGallery" id="{{item}}" data-current="{{index}}" data-type="moments">
+                      <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                    </view>
+                  </block>
+
+
+
+                </view>
+                <view class="weui-uploader__input-box">
+                  <view class="weui-uploader__input" bindtap="chooseMomentsImage"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="page__bd">
+      <view class="weui-cells">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+              <view class="weui-uploader__hd">
+                <view class="weui-uploader__title">微创投记录(请上传本次活动的活动签到表)</view>
+                <view class="weui-uploader__info">{{sheetPhotoUrls.length}}/2</view>
               </view>
               <view class="weui-uploader__bd">
                 <view class="weui-uploader__files" id="uploaderFiles">
@@ -167,7 +198,7 @@
 
                 </view>
                 <view class="weui-uploader__input-box">
-                  <view class="weui-uploader__input" bindtap="chooseSheetImage"></view>
+                  <view class="weui-uploader__input" bindtap="choosesheetImage"></view>
                 </view>
               </view>
             </view>

@@ -1,2 +1,91 @@
 <!--pages/mutualcomment_end/mutualcomment_end.wxml-->
-<text>pages/mutualcomment_end/mutualcomment_end.wxml</text>
+<import src="../../components/gallery.wxml"/>
+<import src="../../components/picker-city/picker-city.wxml"/>
+
+<template is="gallery" data="{{ ...$wux.gallery }}"/>
+<template is="picker-city" data="{{ ...$wux.pickerCity.city }}"/>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title" style="text-align:center;font-size:40px">结题评估</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
+    
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">您所在的组织名称</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindyourOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所在组织</view>
+        </view>
+        <input value="{{yourorganization}}" disabled="true" class="weui-input" placeholder="请选择您所在的组织名称" />
+      </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">被评估组织名称</view>        
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input" bindtap="bindOrganizationPickerChange">
+        <view class="weui-cell__hd">
+          <view class="weui-label">被评估组织</view>
+        </view>
+        <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择被评估组织名称" />
+      </view>
+    </view>
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">评估内容</view>
+    <wux-cell-group title="1">
+            <wux-cell title="具有五人以上核心小组并无组织内外身兼数职现象，能够独立执行项目，组织规则档案完善" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{q1}}" bind:change="onChange1"/>
+                  <text class="wux-rater__text">{{ q1 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="2">
+            <wux-cell title="按计划和目标完成项目活动" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{q2}}" bind:change="onChange2"/>
+                  <text class="wux-rater__text">{{ q2 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="3">
+            <wux-cell title="项目效果好，具有社会服务功能" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q3 }}" bind:change="onChange3"/>
+                  <text class="wux-rater__text">{{ q3 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="4">
+            <wux-cell title="项目资金使用规范且报销凭证规范" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q4 }}" bind:change="onChange4"/>
+                  <text class="wux-rater__text">{{ q4 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+    <wux-cell-group title="5">
+            <wux-cell title="能够筹集外部社会资源" hover-class="none"></wux-cell>
+            <view slot="footer">
+                  <wux-rater value="{{ q5 }}" bind:change="onChange5"/>
+                  <text class="wux-rater__text">{{ q5 }} 分</text>
+            </view>
+    </wux-cell-group>
+
+
+    <view class="weui-cells__title">您的建议及感受</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea value="{{jianyi}}" class="weui-textarea" placeholder="请对该组织及活动的建议和感受" row="8" bindinput="bindJianyiChange" maxlength='300' fixed='{{tagFalse}}'/>
+          <view class="weui-textarea-counter">{{jianyi.length}}/300</view>
+        </view>
+      </view>
+    </view>
+
+   
+    <view class="weui-btn-area">
+    <button class="weui-btn btn-mid" type="primary" plain='true' bindtap="switchToPreview_mcend">预览</button>
+      <button class="weui-btn btn-mid" type="primary"  bindtap='submitAll'>提交</button>
+    </view>
+  </view>
+</view>
+
