@@ -8,6 +8,7 @@
   <view class="page__hd">
     <view class="page__title" style="text-align:center;font-size:40px">结题评估</view>
   </view>
+
   <view class="page__bd">
     <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">错误提示</view>
     
@@ -19,6 +20,7 @@
           <input value="{{xingming}}" class="weui-input" placeholder="请输入您的姓名" bindchange="bindxingmingChange" />
         </view>
     </view>
+
     <view class="weui-cell weui-cell_input">
         <view class="weui-cell__hd">
           <view class="weui-label">所在单位</view>
@@ -26,16 +28,30 @@
         <view class="weui-cell__bd">
           <input value="{{gongzuodanwei}}" class="weui-input" placeholder="请输入您所在的单位" bindchange="bindgongzuodanweiChange" />
         </view>
-    </view>
-    <view class="weui-cells__title" style="text-align:center;font-size:30px">被评估组织名称</view>        
+    </view> 
+
+    <view class="weui-cells__title" style="text-align:center;font-size:30px">被评估组织名称</view>  
+
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input" bindtap="bindOrganizationPickerChange">
         <view class="weui-cell__hd">
           <view class="weui-label">被评估组织</view>
         </view>
+
         <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择被评估组织名称" />
       </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+      <view style="display:{{showOther}}">  
+      <input class="weui-input" placeholder="请输入组织名称"  bindinput="organizationChange"/>
+      </view>
+      </view>
+      </view>
+
+
     </view>
+
+
     <view class="weui-cells__title" style="text-align:center;font-size:30px">评估内容</view>
     <wux-cell-group title="1">
             <wux-cell title="自组织至少具有5名以上成员的核心小组，核心小组成员无阻止内外身兼数职现象，能够协商组织内部各项事务" hover-class="none"></wux-cell>

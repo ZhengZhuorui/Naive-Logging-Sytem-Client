@@ -1,7 +1,7 @@
 // pages/serviceobject/serviceobject.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
-
+var app = getApp()
 var util = require('../../utils/util.js');
 Page({
 
@@ -44,14 +44,18 @@ Page({
         q3: seviceobjectData.q3,
         jianyi: seviceobjectData.jianyi,
         time: seviceobjectData.time,
-        nickname: seviceobjectData.nickname
+        nickname: seviceobjectData.nickname,
+        city: serviceobjectData.city
       })
     }
     var time = util.getNowFormatDate();
+    var city = getApp().globalData.city;
     this.setData({
-      time: time
+      time: time,
+      city: city
     }
     );
+    
     wx.getUserInfo({
       success: function (res) {
         console.log(res);
@@ -162,6 +166,18 @@ Page({
         that.setData({
           organization: p.value[2],
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther: "none"
+          });
+        }
       },
       onHidden() {
         console.log("[picker-city]: onHidden");
@@ -248,7 +264,8 @@ Page({
         q3: that.data.q3,
         jianyi: that.data.jianyi,
         time: that.data.time,
-        nickname: that.data.nickname
+        nickname: that.data.nickname,
+        city:that.data.city
       },
       success: function (res) {
         console.log(res);

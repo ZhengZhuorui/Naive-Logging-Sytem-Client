@@ -28,6 +28,7 @@ App({
   globalData: {
     openid:'',
     sessionid:'',
-    username:''
+    username:'',
+    city:null
   }
 })

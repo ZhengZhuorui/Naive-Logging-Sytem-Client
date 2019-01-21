@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/new_index/new_index",
     "pages/index/index",
     "pages/record/record",
     "pages/comment/comment",

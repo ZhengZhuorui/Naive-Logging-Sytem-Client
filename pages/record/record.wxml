@@ -1,7 +1,7 @@
 <!--pages/record/record.wxml-->
 <view class="page">
     <view class="page__hd">
-        <view class="page__title" style="font-size:25px">大栅栏社区营造记录表</view>
+        <view class="page__title" style="font-size:25px">社区营造记录表</view>
     </view>
     <view class="page__bd">
         <view class="icon-box">

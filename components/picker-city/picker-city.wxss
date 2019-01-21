@@ -1,5 +1,5 @@
 .col-province{
-  min-width: 30%;
+  min-width: 10%;
 }
 
 .col-district{

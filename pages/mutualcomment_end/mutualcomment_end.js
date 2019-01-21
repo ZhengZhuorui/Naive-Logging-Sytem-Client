@@ -1,7 +1,7 @@
 //pages/mutualcomment_end/mutualcomment_end.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
-
+var app = getApp()
 var util = require('../../utils/util.js');
 Page({
 
@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showOther1:"none",
+    showOther2:"none",
     yourorganization: "请选择您所在的组织名称",
     organization: "请选择被评估组织名称",
     q1: "",
@@ -17,7 +19,8 @@ Page({
     q4: "",
     q5: "",
     time: "",
-    jianyi: ""
+    jianyi: "",
+    city:""
   },
 
   /**
@@ -33,6 +36,7 @@ Page({
     );
     if (mutualcomment_endData) {
       this.setData({
+        showOther: mutualcomment_endData.showOther,  //是否展示other这个输入框
         yourorganization: mutualcomment_endData.yourorganization,
         organization: mutualcomment_endData.organization,
         time: mutualcomment_endData.time,
@@ -42,7 +46,13 @@ Page({
         q4: mutualcomment_endData.q4,
         q5: mutualcomment_endData.q5,
         jianyi: mutualcomment_endData.jianyi,
+        city: mutualcomment_endData.city
       });
+      var city = getApp().globalData.city;
+      this.setData({
+        city: city
+      }
+      ); 
     }
 
   },
@@ -131,6 +141,18 @@ Page({
         that.setData({
           yourorganization: p.value[2]
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther1: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther1: "none"
+          });
+        }
       },
       onHidden() {
         console.log("[picker-city]: onHidden");
@@ -154,6 +176,18 @@ Page({
         that.setData({
           organization: p.value[2]
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther2: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther2: "none"
+          });
+        }
       },
       onHidden() {
         console.log("[picker-city]: onHidden");
@@ -162,6 +196,19 @@ Page({
         });
       }
     });
+  },
+
+  yourorganizationChange(e) {
+    this.setData({
+      yourorganization: e.detail.value
+    }
+    )
+  },
+  organizationChange(e) {
+    this.setData({
+      organization: e.detail.value
+    }
+    )
   },
 
   sliderChange(e) {
@@ -235,6 +282,7 @@ Page({
         q4: that.data.q4,       //问题4
         q5: that.data.q5,       //问题5
         jianyi: that.data.jianyi,   //建议
+        city: that.data.city
       },
       success: function (res) {
         var ret_code = res.data.ret_code;

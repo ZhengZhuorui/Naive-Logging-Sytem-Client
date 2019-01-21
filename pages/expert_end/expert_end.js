@@ -1,7 +1,7 @@
 // pages/expert_end/expert_end.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
-
+var app=getApp()
 var util = require('../../utils/util.js');
 Page({
 
@@ -12,6 +12,7 @@ Page({
     showOther: "none",  //是否展示other这个输入框
     xingming: "",
     gongzuodanwei: "",
+    shequ : '',
     organization: "请选择被评估组织",
     q1: "",
     q2: "",
@@ -27,7 +28,8 @@ Page({
     jianyi2: "",
     jianyi3: "",
     time: "",
-    nickname: ""
+    nickname: "",
+    city:''
   },
 
   /**
@@ -41,6 +43,7 @@ Page({
         showOther: expert_endData.showOther,  //是否展示other这个输入框
         xingming: expert_endData.xingming,
         gongzuodanwei: expert_endData.gongzuodanwei,
+        shequ: expert_endData.shequ,
         organization: expert_endData.organization,
         q1: expert_endData.q1,
         q2: expert_endData.q2,
@@ -56,12 +59,15 @@ Page({
         jianyi2: expert_endData.jianyi2,
         jianyi3: expert_endData.jianyi3,
         time: expert_endData.time,
-        nickname: expert_endData.nickname
+        nickname: expert_endData.nickname,
+        city: expert_endData.city
       })
     }
     var time = util.getNowFormatDate();
+    var city = getApp().globalData.city;
     this.setData({
-      time: time
+      time: time,
+      city: city
     }
     );
     wx.getUserInfo({
@@ -172,9 +178,23 @@ Page({
       onChange(p) {
         console.log(p);
         that.setData({
+          shequ: p.value[1],
           organization: p.value[2],
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther: "none"
+          });
+        }
       },
+     
       onHidden() {
         console.log("[picker-city]: onHidden");
         that.setData({
@@ -183,6 +203,7 @@ Page({
     }
     });
   },
+
   organizationchange(e){
     this.setData({
       organization:e.detail.value
@@ -290,6 +311,7 @@ Page({
       data: {
         xingming: that.data.xingming,
         gongzuodanwei: that.data.gongzuodanwei,
+        shequ: that.data.shequ,
         organization: that.data.organization,
         q1: that.data.q1,
         q2: that.data.q2,
@@ -305,7 +327,8 @@ Page({
         jianyi2: that.data.jianyi2,
         jianyi3: that.data.jianyi3,
         time: that.data.time,
-        nickname: that.data.nickname
+        nickname: that.data.nickname,
+        city: that.data.city
       },
       success: function (res) {
         var ret_code = res.data.ret_code;

@@ -1,7 +1,7 @@
 //pages/mutualcomment_begin/mutualcomment_begin.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
-
+var app = getApp()
 var util = require('../../utils/util.js'); 
 Page({
 
@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showother1:"none",
+    showOther2:"none",
     yourorganization:"请选择您所在的组织名称",
     organization:"请选择被评估组织名称",
     time:"",
@@ -17,7 +19,8 @@ Page({
     fuwu:"",
     canyudu:"",
     yusuan:"",
-    jianyi:""
+    jianyi:"",
+    city:""
   },
 
   /**
@@ -33,6 +36,7 @@ Page({
     );
     if (mutualcomment_beginData) {
       this.setData({
+        showOther: mutualcomment_beginData.showOther,  //是否展示other这个输入框
         yourorganization:mutualcomment_beginData.yourorganization,
         organization: mutualcomment_beginData.organization,
         time: mutualcomment_beginData.time,
@@ -42,8 +46,14 @@ Page({
         canyudu: mutualcomment_beginData.canyudu,
         yusuan: mutualcomment_beginData.yusuan,
         jianyi: mutualcomment_beginData.jianyi,
+        city: mutualcomment_beginData.city
       });
     }
+    var city = getApp().globalData.city;
+    this.setData({
+      city: city
+    }
+    );
 
   },
 
@@ -131,6 +141,18 @@ Page({
         that.setData({
           yourorganization: p.value[2]
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther1: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther1: "none"
+          });
+        }
       },
       onHidden() {
         console.log("[picker-city]: onHidden");
@@ -154,6 +176,18 @@ Page({
         that.setData({
           organization: p.value[2]
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther2: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther2: "none"
+          });
+        }
       },
       onHidden() {
         console.log("[picker-city]: onHidden");
@@ -162,6 +196,19 @@ Page({
         });
       }
     });
+  },
+
+  yourorganizationChange(e) {
+    this.setData({
+      yourorganization: e.detail.value
+    }
+    )
+  },
+  organizationChange(e) {
+    this.setData({
+      organization: e.detail.value
+    }
+    )
   },
 
   sliderChange(e) {
@@ -235,6 +282,7 @@ Page({
         canyudu: that.data.canyudu,       //问题4
         yusuan: that.data.yusuan,       //问题5
         jianyi: that.data.jianyi,   //建议
+        city: that.data.city
       },
       success: function (res) {
         var ret_code = res.data.ret_code;

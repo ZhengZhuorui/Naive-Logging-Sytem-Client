@@ -18,7 +18,14 @@
         <view class="weui-cell__hd">
           <view class="weui-label">所在组织</view>
         </view>
-        <input value="{{yourorganization}}" disabled="true" class="weui-input" placeholder="请选择您所在的组织名称" />
+        <input value="{{yourorganization}}" disabled="true" class="weui-input" placeholder="请选择被评估组织名称" />
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+      <view style="display:{{showOther1}}">  
+      <input class="weui-input" placeholder="请输入您所在的组织名称"  bindinput="yourorganizationChange"/>
+      </view>
+      </view>
       </view>
     </view>
     <view class="weui-cells__title" style="text-align:center;font-size:30px">被评估组织名称</view>        
@@ -28,6 +35,13 @@
           <view class="weui-label">被评估组织</view>
         </view>
         <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择被评估组织名称" />
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+      <view style="display:{{showOther2}}">  
+      <input class="weui-input" placeholder="请输入被评估组织名称"  bindinput="organizationChange"/>
+      </view>
+      </view>
       </view>
     </view>
     <view class="weui-cells__title" style="text-align:center;font-size:30px">评估内容</view>

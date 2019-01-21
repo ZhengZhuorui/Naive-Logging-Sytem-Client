@@ -1,6 +1,8 @@
 import Component from '../Component'
 import data from './data'
 
+var app = getApp()
+var city = app.globalData.city
 const format = (data) => {
 	let result = []
 	for(let i = 0; i < data.length; i++) {

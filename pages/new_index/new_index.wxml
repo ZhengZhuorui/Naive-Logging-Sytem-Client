@@ -1,0 +1,31 @@
+<!--pages/new_index/new_index.wxml-->
+<import src="../../components/gallery.wxml"/>
+<template is="gallery" data="{{ ...$wux.gallery }}"/>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view><view class="page__hd">
+    <view class="page__title" style="text-align:center;font-size:40px">基础信息</view>
+  </view> 
+
+  <view class="weui-cells__title" >请选择您所在的城市</view>
+    <view class="weui-cells weui-cells_after-title">
+    <view>
+      <radio-group bindchange="radiocityChange">
+        <label class="weui-cell weui-check__label" wx:for="{{radiocityItems}}">
+          <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
+        </label>
+      </radio-group>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+      <view style="display:{{showOther}}">  
+      <input class="weui-input" placeholder="请输入其他城市" value="{{city}}" bindinput="cityChange"/>
+      </view>
+      </view>
+      </view>
+      </view>
+    </view>
+
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="switchToindex_page">确定</button>
+    </view>
+</view>
+</view>

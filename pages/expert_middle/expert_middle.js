@@ -1,7 +1,7 @@
 // pages/expert_middle/expert_middle.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
-
+var app = getApp()
 var util = require('../../utils/util.js');
 Page({
 
@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showOther: "none",
     xingming:"",
     gongzuodanwei:"",
     organization:"请选择被评估组织",
@@ -26,7 +27,8 @@ Page({
     xiangmusheji:"",
     zijinshiyong:"",
     time:"",
-    nickname:""
+    nickname:"",
+    city:""
   },
 
   /**
@@ -37,6 +39,7 @@ Page({
     var expert_middleData = wx.getStorageSync('expert_middleData');
     if(expert_middleData){
       this.setData({
+        showOther: expert_middleData.showOther,  //是否展示other这个输入框
         xingming: expert_middleData.xingming,
         gongzuodanwei: expert_middleData.gongzuodanwei,
         organization: expert_middleData.organization,
@@ -54,12 +57,15 @@ Page({
         xiangmusheji: expert_middleData.xiangmusheji,
         zijinshiyong: expert_middleData.zijinshiyong,
         time: expert_middleData.time,
-        nickname: expert_middleData.nickname
+        nickname: expert_middleData.nickname,
+        city: expert_middleData.city
       })
     }
     var time = util.getNowFormatDate();
+    var city = getApp().globalData.city;
     this.setData({
-      time: time
+      time: time,
+      city: city
     }
     );
     wx.getUserInfo({
@@ -169,17 +175,38 @@ Page({
       onChange(p) {
         console.log(p);
         that.setData({
-          organization: p.value[2]
+          shequ: p.value[1],
+          organization: p.value[2],
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther: "none"
+          });
+        }
       },
-      onHidden() {
-        console.log("[picker-city]: onHidden");
-        that.setData({
-          showContent: true
-        });
-      }
-    });
+        onHidden() {
+          console.log("[picker-city]: onHidden");
+          that.setData({
+            showContent: true
+          });
+        }
+      });
 },
+
+organizationChange(e){
+  this.setData({
+    organization: e.detail.value
+  }
+  )
+},
+
   onChange1(e) {
     this.setData({
       neirong: e.detail.value,
@@ -297,7 +324,8 @@ Page({
         xiangmusheji: that.data.xiangmusheji,
         zijinshiyong: that.data.zijinshiyong,
         time: that.data.time,
-        nickname: that.data.nickname
+        nickname: that.data.nickname,
+        city: that.data.city
       },
       success: function (res) {
         var ret_code = res.data.ret_code;

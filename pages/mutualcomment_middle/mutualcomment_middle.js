@@ -1,7 +1,7 @@
 // pages/mutualcomment_middle/mutualcomment_middle.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
-
+var app = getApp()
 var util = require('../../utils/util.js');
 Page({
 
@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showOther1:"none",
+    showOther2:"none",
     yourorganization: "请选择您所在的组织名称",
     organization: "请选择被评估组织名称",
     time:"",
@@ -18,7 +20,8 @@ Page({
     fengong: "",
     zijin: "",
     jianyi: "",
-    nickname:""
+    nickname:"",
+    city:""
 
   },
 
@@ -30,6 +33,7 @@ Page({
     var mutualcomment_middleData = wx.getStorageSync('mutualcomment_middleData')
     if (mutualcomment_middleData) {
       this.setData({
+        showOther: mutualcomment_middleData.showOther,  //是否展示other这个输入框
         yourorganization: mutualcomment_middleData.yourorganization,
         organization: mutualcomment_middleData.organization,
         time: mutualcomment_middleData.time,
@@ -39,12 +43,15 @@ Page({
         fengong: mutualcomment_middleData.fengong,
         zijin: mutualcomment_middleData.zijin,
         jianyi: mutualcomment_middleData.jianyi,
-        nickname: mutualcomment_middleData.nickname
+        nickname: mutualcomment_middleData.nickname,
+        city:mutualcomment_middleData.city
       });
     }
     var time = util.getNowFormatDate();
+    var city = getApp().globalData.city;
     this.setData({
-      time: time
+      time: time,
+      city: city
     }
     );
     wx.getUserInfo({
@@ -148,6 +155,18 @@ Page({
         that.setData({
           yourorganization: p.value[2]
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther1: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther1: "none"
+          });
+        }
       },
       onHidden() {
         console.log("[picker-city]: onHidden");
@@ -171,6 +190,18 @@ Page({
         that.setData({
           organization: p.value[2]
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther2: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther2: "none"
+          });
+        }
       },
       onHidden() {
         console.log("[picker-city]: onHidden");
@@ -179,6 +210,19 @@ Page({
         });
       }
     });
+  },
+
+  yourorganizationChange(e) {
+    this.setData({
+      yourorganization: e.detail.value
+    }
+    )
+  },
+  organizationChange(e) {
+    this.setData({
+      organization: e.detail.value
+    }
+    )
   },
 
   onChange1(e) {
@@ -245,7 +289,8 @@ Page({
         fengong: that.data.fengong,       //问题4
         zijin: that.data.zijin,       //问题5
         jianyi: that.data.jianyi,   //建议
-        nickname:that.data.nickname
+        nickname:that.data.nickname,
+        city: that.data.city
       },
       success: function (res) {
         var ret_code = res.data.ret_code;

@@ -40,7 +40,15 @@
         <view class="weui-cell__hd">
           <view class="weui-label">举办活动组织</view>
         </view>
-          <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择举办活动组织" />
+          <input value="{{organization}}" disabled="true" class="weui-input" placeholder="请选择举办活动组织名称" />
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+      <view style="display:{{showOther}}">  
+      <input class="weui-input" placeholder="请输入举办活动组织名称"  bindinput="organizationChange"/>
+      </view>
+      </view>
+
     </view>    
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">

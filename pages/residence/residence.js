@@ -1,16 +1,17 @@
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
-
+var app = getApp()
 var util = require('../../utils/util.js');
 
 Page({
   data: {
     /* 填写的表单信息 */
+    showOther:"none",
     organization: "请选择组织名称",
     joinNumber: "", //参加人数
     location: "",
-    date: "活动开始日期，非填写小程序日期",
-    time: "活动开始时间，非填写小程序时间",
+    date: "请填写活动开始日期",
+    time: "请填写活动开始时间",
     theme: "",
     content: "",
 
@@ -45,6 +46,7 @@ Page({
 
     //记录自定义的组织名称选择器是否弹出，用于控制活动内容textarea的隐藏
     showContent:true,
+    city:""
 
   },
 
@@ -65,6 +67,7 @@ Page({
 
     if (residenceData) {
       this.setData({
+        showOther: residenceData.showOther,
         organization: residenceData.organization,
         joinNumber: residenceData.joinNumber, //参加人数
         location: residenceData.location,
@@ -85,9 +88,16 @@ Page({
         currentTab: residenceData.currentTab,
         showPage1: residenceData.showPage1,
         showPage2: residenceData.showPage2,
-        showPage3: residenceData.showPage3
+        showPage3: residenceData.showPage3,
+
+        city:residenceData.city
 
       });
+      var city = getApp().globalData.city;
+      this.setData({
+        city: city
+      }
+      );
     }
 
   },
@@ -219,6 +229,18 @@ Page({
         that.setData({
           organization: p.value[2],
       });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther: "none"
+          });
+        }
       },
       onHidden(){
         console.log("[picker-city]: onHidden");
@@ -227,6 +249,12 @@ Page({
         });
       }
     });
+  },
+  organizationChange(e) {
+    this.setData({
+      organization: e.detail.value
+    }
+    )
   },
 
   /* 下面分别是参与人数，地点，日期，时间的监听器 */
@@ -451,6 +479,7 @@ Page({
         
         latitude: that.data.latitude,
         longitude: that.data.longitude,
+        city: that.data.city
       },
 
       success: function (res) {
@@ -587,10 +616,20 @@ Page({
       });
       return false;
     }
-    if(this.data.date==="请点击选择日期"){
+    if (this.data.date ==="请填写活动开始日期"){
       wx.showModal({
         title: '提示',
-        content: '请选择日期',
+        content: '请填写活动开始日期',
+        showCancel: false, //不显示取消按钮
+        confirmText: '确定'
+      });
+      return false;
+    }
+
+    if (this.data.time === "请填写活动开始时间") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写活动开始时间',
         showCancel: false, //不显示取消按钮
         confirmText: '确定'
       });

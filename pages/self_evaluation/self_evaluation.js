@@ -1,7 +1,7 @@
 // pages/self_evaluation/self_evaluation.js
 import $wuxGallery from "../../components/gallery.js"
 import $wuxPickerCity from "../../components/picker-city/picker-city.js"
-
+var app = getApp()
 var util = require('../../utils/util.js'); 
 Page({
 
@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showOther:"none",
     radioidentityItems: [
       { name: '组织负责人（核心组成员）', value: "组织负责人（核心组成员）", checked: true},
       { name: '财务负责人（核心组成员）', value: "财务负责人（核心组成员）"},
@@ -26,7 +27,8 @@ Page({
     q7:"",
     q8:"",
     identity:"组织负责人（核心组成员）", 
-    time:""
+    time:"",
+    city:""
 
   },
 
@@ -37,12 +39,15 @@ Page({
     var that = this;
     var self_evaluationData = wx.getStorageSync('self_evaluationData');
     var time = util.getNowFormatDate();
+    var city = getApp().globalData.city;
     this.setData({
-      time: time
+      time: time,
+      city: city
     }
     );
     if (self_evaluationData) {
       this.setData({
+        showOther: self_evaluationData.showOther,
         organization: self_evaluationData.organization,
         name: self_evaluationData.name,
         time: self_evaluationData.time,
@@ -54,7 +59,8 @@ Page({
         q6: self_evaluationData.q6,
         q7: self_evaluationData.q7,
         q8: self_evaluationData.q8,
-        identity: self_evaluationData.identity
+        identity: self_evaluationData.identity,
+        city:self_evaluationData.city
       });
     }
 
@@ -152,6 +158,18 @@ Page({
         that.setData({
           organization: p.value[2]
         });
+        if (p.value[2] == "其他") {
+          console.log("show other");
+          this.setData({
+            showOther: "inline"
+          });
+        } else {
+          //未选中‘其他’，隐藏输入框
+          console.log("hide other");
+          this.setData({
+            showOther: "none"
+          });
+        }
       },
       onHidden() {
         console.log("[picker-city]: onHidden");
@@ -160,6 +178,12 @@ Page({
         });
       }
     });
+  },
+  organizationChange(e) {
+    this.setData({
+      organization: e.detail.value
+    }
+    )
   },
   onChange1(e) {
     this.setData({
@@ -248,6 +272,7 @@ Page({
         q6: that.data.q6,
         q7: that.data.q7,
         q8: that.data.q8,
+        city:that.data.city
       },
       success: function (res) {
         var ret_code = res.data.ret_code;
