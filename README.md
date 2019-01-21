@@ -1,4 +1,82 @@
+## Program Description 
+
+Written by Zhuorui Zheng.
+
+### introduction and pre-knowledge
+
+  Before reading and modifying the code, please make sure that you know the base knowledege about html, css, js, especially the js. you have better learn the [vue.js](https://cn.vuejs.org/) framework, and know the MVC(model-view-controller) framework. It's good for you understand how to write not only the wechat applet but a webpage.
+
+### program index:
+
+first page, select city: new_index
+
+​	index
+
+​		record
+
+​			residence
+
+​			worker
+
+​		comment
+
+​			mutualcomment
+
+​				mutualcomment_begin
+
+​				mutualcomment_middle
+
+​				mutualcomment_end
+
+​			self_evaluation
+
+​			expert
+
+​				expert_begin
+
+​				expert_middle
+
+​				expert_end
+
+​			serviceobject
+
+
+
+### Components:
+
+  A page contain a lot of components, components purpose is code reuse that reduce the number of bugs and reduce the code.Now the components are these:
+
+###### organzation:
+
+​	to show a organzation selecting view, the code have some defect in somewhere because the author write the component firstly and know less about component. 
+
+​	properties: labelName(show the label),contentName (show the placeholder)
+
+​	event handler: organizationChangeEvent (the name is bad,so if you have time you can change it)	
+
+###### picker-city:
+
+​	you don't mind it, it's not written by me and you don't use it.
+
+###### score-page:
+
+​	because the program have lots of page which should user to give the score about something, so I make it as a components.
+
+​	properties: questions(a list, show questions)
+
+​	event handler: change(return a list named score,  e.detail.score)
+
+### Wxss
+
+​	Wxss is like css. I am not good at UI design and I seldom write wxss myself. I use [WeUI](https://github.com/Tencent/weui) and [Wux](https://github.com/wux-weapp/wux-weapp/), so read these document directlly. To be honest, I don't know these, and the program UI, emm...the most wxml and wxss isn't written by me, please ask the other people writed it before.
+
+
+
+The document left are not written by me.
+
 # 文档
+
+​		
 
 ## 注意：
 
